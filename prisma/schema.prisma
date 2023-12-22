@@ -1,0 +1,69 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Student {
+  id         String       @id @default(cuid())
+  firstname  String
+  lastname   String
+  email      String       @unique
+  matricNo   String       @unique
+  hall       Hall
+  roomNumber String
+  complaint  Complaints[]
+
+  @@index([matricNo, email])
+}
+
+model HallOfficer {
+  id        String @id @default(cuid())
+  firstname String
+  lastname  String
+  email     String @unique
+  staffNo   String @unique
+  hall      Hall
+
+  @@index([staffNo, email])
+}
+
+model Personnel {
+  id        String @id @default(cuid())
+  firstname String
+  lastname  String
+  email     String @unique
+
+  @@index([email])
+}
+
+model Complaints {
+  id        String   @id @default(cuid())
+  hall      Hall     @unique
+  student   Student? @relation(fields: [matricNo], references: [matricNo])
+  matricNo  String   @unique
+  fixed     Boolean  @default(false)
+  inspected Boolean  @default(false)
+  createdAt DateTime @default(now())
+
+  @@index([hall])
+}
+
+enum Hall {
+  PETER
+  PAUL
+  JOHN
+  JOSEPH
+  DANIEL
+  ESTHER
+  LYDIA
+  DEBORAH
+  MARY
+  DORCAS
+}
