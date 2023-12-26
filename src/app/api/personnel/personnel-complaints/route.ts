@@ -1,11 +1,7 @@
 import { NextRequest } from 'next/server'
 import prisma from '@/lib/db'
 
-const CATEGORIES = [
-  'ELECTRICAL',
-  'FURNITURE',
-  'PLUMBING',
-] as const
+const CATEGORIES = ['ELECTRICAL', 'FURNITURE', 'PLUMBING'] as const
 
 type Category = (typeof CATEGORIES)[number]
 
@@ -15,9 +11,10 @@ export async function GET(request: NextRequest) {
 
     const complaints = await prisma.complaints.findMany({
       where: {
-        category
-      }, 
-      orderBy: {createdAt: "desc"},
+        category,
+        personnelId: '',
+      },
+      orderBy: { createdAt: 'desc' },
       select: {
         id: true,
         hall: true,
@@ -28,9 +25,9 @@ export async function GET(request: NextRequest) {
             matricNo: true,
             firstname: true,
             lastname: true,
-            roomNumber: true
-          }
-        }
+            roomNumber: true,
+          },
+        },
       },
     })
 

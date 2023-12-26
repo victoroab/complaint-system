@@ -18,6 +18,8 @@ export async function POST(request: NextRequest) {
       where: { email },
     })
 
+    // send email by spinning up a cron job?
+    // try some logic that sends the request
     return Response.json('created')
   } catch (e) {
     console.error(e)
