@@ -30,7 +30,7 @@ export default function Page() {
         <div className="flex items-center justify-center w-full">
           <Card className="rounded-xl">
             <CardHeader>
-              <CardTitle></CardTitle>
+              <CardTitle>Complaint Form</CardTitle>
               <CardDescription>Fill the appropriate data</CardDescription>
             </CardHeader>
             <CardContent className="flex gap-4 flex-wrap">
