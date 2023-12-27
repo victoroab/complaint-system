@@ -6,7 +6,7 @@ import { User, KeyRound } from 'lucide-react'
 
 export function LoginForm({ userType }: { userType: string }) {
   return (
-    <div className="flex flex-col p-6 gap-5">
+    <div className="flex flex-col p-6 gap-5 w-full">
       <span className="flex items-center gap-3">
         <User />
         <Input placeholder="email" />

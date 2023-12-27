@@ -23,7 +23,7 @@ export default function Home() {
       <div className="border rounded-xl h-auto p-12">
         <Card className="rounded-xl">
           <CardHeader>
-            <CardTitle className="flex items-center justify-start gap-3">
+            <CardTitle className="flex items-center flex-wrap justify-start gap-3">
               <span>Sign In</span>
               <EnterIcon className="w-7 h-7" />
             </CardTitle>

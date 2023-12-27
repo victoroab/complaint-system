@@ -27,8 +27,8 @@ export function FormShell({
             <CardDescription className="pt-2">
               Enter your credentials
             </CardDescription>
-            <CardContent>{children}</CardContent>
           </CardHeader>
+          <CardContent className="p-0">{children}</CardContent>
         </Card>
       </div>
     </main>
