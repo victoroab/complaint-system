@@ -27,7 +27,7 @@ export function UserDetails({
 }) {
   return (
     <span className="text-primary ml-6 text-lg">
-      Victor Balogun - D106 - Daniel
+      Victor Balogun - D107 - Daniel
     </span>
   )
 }

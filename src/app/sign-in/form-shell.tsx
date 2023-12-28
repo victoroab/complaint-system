@@ -16,8 +16,8 @@ export function FormShell({
   children: React.ReactNode
 }) {
   return (
-    <main className="flex min-h-screen items-center justify-center p-24">
-      <div className="border rounded-xl h-auto p-12">
+    <main className="flex min-h-screen items-center justify-center p-4">
+      <div className="border rounded-xl h-auto p-5">
         <BackButton />
         <Card className="rounded-xl mt-6">
           <CardHeader>
