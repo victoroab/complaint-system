@@ -19,8 +19,8 @@ import Link from 'next/link'
 
 export default function Home() {
   return (
-    <main className="flex min-h-screen items-center justify-center p-24">
-      <div className="border rounded-xl h-auto p-12">
+    <main className="flex min-h-screen items-center justify-center p-4">
+      <div className="border rounded-xl h-auto p-6">
         <Card className="rounded-xl">
           <CardHeader>
             <CardTitle className="flex items-center flex-wrap justify-start gap-3">

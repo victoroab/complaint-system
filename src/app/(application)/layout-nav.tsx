@@ -18,7 +18,7 @@ import Link from 'next/link'
 export function LayoutNav({ children }: { children: React.ReactNode }) {
   return (
     <>
-      <header className="border w-full items-center py-6 px-8 justify-between sm:hidden flex h-10">
+      <header className="border-b w-full items-center py-6 px-8 justify-between sm:hidden flex h-10">
         <Link href="/dashboard">LOGO</Link>
 
         <div className="flex gap-3 flex-wrap items-center justify-center">
