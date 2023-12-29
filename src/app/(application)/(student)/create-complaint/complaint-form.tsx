@@ -76,11 +76,7 @@ export function ComplaintForm() {
         </div>
       </CardContent>
       <CardFooter className="w-full">
-        <Button
-          className="w-full rounded-xl"
-          onClick={() => postData()}
-          disabled={issueRef.current?.value === '' || category === ''}
-        >
+        <Button className="w-full rounded-xl" onClick={() => postData()}>
           Submit
         </Button>
       </CardFooter>

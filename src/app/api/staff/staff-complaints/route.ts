@@ -24,25 +24,27 @@ export async function GET(request: NextRequest) {
       where: {
         hall,
         resolved: false,
+        inspected: false,
       },
       select: {
         id: true,
         category: true,
         createdAt: true,
         fixed: true,
-        inspected: true,
         issue: true,
         student: {
           select: {
+            firstname: true,
+            lastname: true,
             matricNo: true,
             roomNumber: true,
-            complaint: {
-              select: {
-                handler: {
-                  select: { email: true, firstname: true, lastname: true },
-                },
-              },
-            },
+          },
+        },
+        handler: {
+          select: {
+            email: true,
+            firstname: true,
+            lastname: true,
           },
         },
       },

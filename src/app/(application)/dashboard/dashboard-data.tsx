@@ -10,7 +10,7 @@ import {
   Pencil1Icon,
   ReaderIcon,
   ClockIcon,
-  PersonIcon,
+  DotsHorizontalIcon,
 } from '@radix-ui/react-icons'
 import Link from 'next/link'
 
@@ -88,7 +88,7 @@ export function StaffDashboardData() {
   return (
     <div className="flex gap-4 items-start flex-wrap dark:text-secondary-foreground">
       <Card className="cursor-pointer w-96 rounded-xl hover:bg-primary-foreground">
-        <Link href={'/consultations'} className="">
+        <Link href={'/complaints/pending'} className="">
           <CardHeader>
             <CardTitle className="flex flex-wrap items-center justify-between gap-4 text-base font-normal">
               Complaints
@@ -103,7 +103,7 @@ export function StaffDashboardData() {
         </Link>
       </Card>
       <Card className="cursor-pointer w-96 rounded-xl hover:bg-primary-foreground">
-        <Link href={'/consultations'} className="">
+        <Link href={'/complaints/resolved'} className="">
           <CardHeader>
             <CardTitle className="flex flex-wrap items-center justify-between gap-4 text-base font-normal">
               History
@@ -117,21 +117,6 @@ export function StaffDashboardData() {
           </CardFooter>
         </Link>
       </Card>
-      <Card className="cursor-pointer w-96 rounded-xl hover:bg-primary-foreground">
-        <Link href={'/consultations'} className="">
-          <CardHeader>
-            <CardTitle className="flex flex-wrap items-center justify-between gap-4 text-base font-normal">
-              Personnels
-              <PersonIcon />
-            </CardTitle>
-            <CardDescription></CardDescription>
-          </CardHeader>
-          <CardContent className=""></CardContent>
-          <CardFooter className="text-muted-foreground">
-            Notify Personnels
-          </CardFooter>
-        </Link>
-      </Card>
     </div>
   )
 }
@@ -140,7 +125,7 @@ export function PersonnelDashboardData() {
   return (
     <div className="flex gap-4 items-start flex-wrap dark:text-secondary-foreground">
       <Card className="cursor-pointer w-96 rounded-xl hover:bg-primary-foreground">
-        <Link href={'/consultations'} className="">
+        <Link href={'/complaints/pending'} className="">
           <CardHeader>
             <CardTitle className="flex flex-wrap items-center justify-between gap-4 text-base font-normal">
               Complaints
@@ -155,7 +140,22 @@ export function PersonnelDashboardData() {
         </Link>
       </Card>
       <Card className="cursor-pointer w-96 rounded-xl hover:bg-primary-foreground">
-        <Link href={'/consultations'} className="">
+        <Link href={'/complaints/in-progress'} className="">
+          <CardHeader>
+            <CardTitle className="flex flex-wrap items-center justify-between gap-4 text-base font-normal">
+              In Progress
+              <DotsHorizontalIcon />
+            </CardTitle>
+            <CardDescription></CardDescription>
+          </CardHeader>
+          <CardContent className=""></CardContent>
+          <CardFooter className="text-muted-foreground">
+            Complaints you are handling
+          </CardFooter>
+        </Link>
+      </Card>
+      <Card className="cursor-pointer w-96 rounded-xl hover:bg-primary-foreground">
+        <Link href={'/complaints/resolved'} className="">
           <CardHeader>
             <CardTitle className="flex flex-wrap items-center justify-between gap-4 text-base font-normal">
               History

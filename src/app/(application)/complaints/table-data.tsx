@@ -10,15 +10,81 @@ import {
 } from '@/components/ui/table'
 import { Button } from '@/components/ui/button'
 import { useQuery } from '@tanstack/react-query'
-import { getStudentPending } from './pending/functions'
-import { getStudentResolved } from './resolved/functions'
+import {
+  getStudentPending,
+  getStaffPending,
+  getPersonnelPending,
+} from './pending/functions'
+import {
+  getStaffResolved,
+  getStudentResolved,
+  getPersonnelResolved,
+} from './resolved/functions'
+import { getInProgress } from './in-progress/function'
 
 type User = 'STUDENT' | 'PERSONNEL' | 'STAFF'
+
+export function ProgressTableData() {
+  const inProgress = useQuery({
+    queryKey: ['inProgress'],
+    queryFn: getInProgress,
+  })
+
+  return (
+    <div className="flex">
+      <Table>
+        <TableHeader>
+          <TableRow>
+            <TableHead>S/N</TableHead>
+            <TableHead>Issue</TableHead>
+            <TableHead>Hall</TableHead>
+            {/* <TableHead>Room</TableHead> */}
+            <TableHead>Student Name</TableHead>
+            <TableHead>Matric No</TableHead>
+            <TableHead>CreatedAt</TableHead>
+            <TableHead>Action</TableHead>
+          </TableRow>
+        </TableHeader>
+        <TableBody>
+          {inProgress?.data?.map((item: any, idx: any) => (
+            <TableRow key={idx}>
+              <TableCell>{idx + 1}</TableCell>
+              <TableCell>{item.issue}</TableCell>
+              <TableCell>{item.hall}</TableCell>
+              {/* <TableCell>D107</TableCell> */}
+              <TableCell>{`${item?.student?.firstname ?? ''} ${
+                item?.student?.lastname ?? ''
+              }`}</TableCell>
+              <TableCell>{item?.student?.matricNo}</TableCell>
+
+              <TableCell>{item.createdAt}</TableCell>
+              <TableCell>
+                <Button className="rounded-xl" size="sm">
+                  Mark Fixed
+                </Button>
+              </TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
+    </div>
+  )
+}
 
 export function PendingTableData({ user }: { user: User }) {
   const studentPending = useQuery({
     queryKey: ['studentPending'],
     queryFn: getStudentPending,
+  })
+
+  const staffPending = useQuery({
+    queryKey: ['staffPending'],
+    queryFn: getStaffPending,
+  })
+
+  const personnelPending = useQuery({
+    queryKey: ['personnelPending'],
+    queryFn: getPersonnelPending,
   })
 
   if (user === 'STUDENT') {
@@ -76,7 +142,7 @@ export function PendingTableData({ user }: { user: User }) {
               <TableHead>S/N</TableHead>
               <TableHead>Category</TableHead>
               <TableHead>Issue</TableHead>
-              <TableHead>Room</TableHead>
+              {/* <TableHead>Room</TableHead> */}
               <TableHead>Student Name</TableHead>
               <TableHead>Matric No</TableHead>
               <TableHead>Personnel</TableHead>
@@ -86,23 +152,32 @@ export function PendingTableData({ user }: { user: User }) {
             </TableRow>
           </TableHeader>
           <TableBody>
-            <TableRow>
-              <TableCell>1</TableCell>
-              <TableCell>Electrical</TableCell>
-              <TableCell>Spoilt Sockets</TableCell>
-              <TableCell>D107</TableCell>
-              <TableCell>Victor Balogun</TableCell>
-              <TableCell>19CH026505</TableCell>
-              <TableCell>Arike Preorder</TableCell>
-              <TableCell>false</TableCell>
-              <TableCell>false</TableCell>
-              <TableCell>28/12/2023</TableCell>
-              <TableCell>
-                <Button className="rounded-xl" size="sm">
-                  Mark Inspected
-                </Button>
-              </TableCell>
-            </TableRow>
+            {staffPending?.data?.map((item: any, idx: any) => (
+              <TableRow key={item.id}>
+                <TableCell>{idx + 1}</TableCell>
+                <TableCell>{item.category}</TableCell>
+                <TableCell>{item.issue}</TableCell>
+                {/* <TableCell>D107</TableCell> */}
+                <TableCell>{`${item?.student?.firstname ?? ''} ${
+                  item?.student?.lastname ?? ''
+                }`}</TableCell>
+                <TableCell>{item?.student?.matricNo}</TableCell>
+                <TableCell>{`${item?.handler?.firstname ?? ''} ${
+                  item?.handler?.lastname ?? ''
+                }`}</TableCell>
+                <TableCell>{item.fixed === true ? 'yes' : 'no'}</TableCell>
+                <TableCell>{item.createdAt}</TableCell>
+                <TableCell>
+                  <Button
+                    className="rounded-xl"
+                    size="sm"
+                    disabled={item.fixed === false}
+                  >
+                    Mark Inspected
+                  </Button>
+                </TableCell>
+              </TableRow>
+            ))}
           </TableBody>
         </Table>
       </div>
@@ -115,10 +190,9 @@ export function PendingTableData({ user }: { user: User }) {
           <TableHeader>
             <TableRow>
               <TableHead>S/N</TableHead>
-              <TableHead>Category</TableHead>
               <TableHead>Issue</TableHead>
               <TableHead>Hall</TableHead>
-              <TableHead>Room</TableHead>
+              {/* <TableHead>Room</TableHead> */}
               <TableHead>Student Name</TableHead>
               <TableHead>Matric No</TableHead>
               <TableHead>CreatedAt</TableHead>
@@ -126,21 +200,25 @@ export function PendingTableData({ user }: { user: User }) {
             </TableRow>
           </TableHeader>
           <TableBody>
-            <TableRow>
-              <TableCell>1</TableCell>
-              <TableCell>Electrical</TableCell>
-              <TableCell>Spoilt Sockets</TableCell>
-              <TableCell>Hall</TableCell>
-              <TableCell>D107</TableCell>
-              <TableCell>Victor Balogun</TableCell>
-              <TableCell>19CH026505</TableCell>
-              <TableCell>28/12/2023</TableCell>
-              <TableCell>
-                <Button className="rounded-xl" size="sm">
-                  Mark Fixed
-                </Button>
-              </TableCell>
-            </TableRow>
+            {personnelPending?.data?.map((item: any, idx: any) => (
+              <TableRow key={idx}>
+                <TableCell>{idx + 1}</TableCell>
+                <TableCell>{item.issue}</TableCell>
+                <TableCell>{item.hall}</TableCell>
+                {/* <TableCell>D107</TableCell> */}
+                <TableCell>{`${item?.student?.firstname ?? ''} ${
+                  item?.student?.lastname ?? ''
+                }`}</TableCell>
+                <TableCell>{item?.student?.matricNo}</TableCell>
+
+                <TableCell>{item.createdAt}</TableCell>
+                <TableCell>
+                  <Button className="rounded-xl" size="sm">
+                    Handle Complaint
+                  </Button>
+                </TableCell>
+              </TableRow>
+            ))}
           </TableBody>
         </Table>
       </div>
@@ -152,6 +230,16 @@ export function ResolvedTableData({ user }: { user: User }) {
   const studentResolved = useQuery({
     queryKey: ['studentResolved'],
     queryFn: getStudentResolved,
+  })
+
+  const staffResolved = useQuery({
+    queryKey: ['staffResolved'],
+    queryFn: getStaffResolved,
+  })
+
+  const personnelResolved = useQuery({
+    queryKey: ['personnelResolved'],
+    queryFn: getPersonnelResolved,
   })
 
   if (user === 'STUDENT') {
@@ -197,22 +285,28 @@ export function ResolvedTableData({ user }: { user: User }) {
               <TableHead>Issue</TableHead>
               <TableHead>Student Name</TableHead>
               <TableHead>Matric No</TableHead>
-              <TableHead>Room</TableHead>
+              {/* <TableHead>Room</TableHead> */}
               <TableHead>Personnel</TableHead>
               <TableHead>CreatedAt</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
-            <TableRow>
-              <TableCell>1</TableCell>
-              <TableCell>Electrical</TableCell>
-              <TableCell>Spoilt Sockets</TableCell>
-              <TableCell>Victor Balogun</TableCell>
-              <TableCell>19CH026505</TableCell>
-              <TableCell>D107</TableCell>
-              <TableCell>Arike Preorder</TableCell>
-              <TableCell>28/12/2023</TableCell>
-            </TableRow>
+            {staffResolved?.data?.map((item: any, idx: any) => (
+              <TableRow key={item.id}>
+                <TableCell>{idx + 1}</TableCell>
+                <TableCell>{item.category}</TableCell>
+                <TableCell>{item.issue}</TableCell>
+                <TableCell className="h-auto">{`${
+                  item?.student?.firstname ?? ''
+                } ${item?.student?.lastname ?? ''}`}</TableCell>
+                <TableCell>{item?.student?.matricNo}</TableCell>
+                {/* <TableCell>D107</TableCell> */}
+                <TableCell className="h-auto">{`${
+                  item?.handler?.firstname ?? ''
+                } ${item?.handler?.lastname ?? ''}`}</TableCell>
+                <TableCell>{item.createdAt}</TableCell>
+              </TableRow>
+            ))}
           </TableBody>
         </Table>
       </div>
@@ -226,22 +320,26 @@ export function ResolvedTableData({ user }: { user: User }) {
             <TableHead>S/N</TableHead>
             <TableHead>Issue</TableHead>
             <TableHead>Hall</TableHead>
-            <TableHead>Room</TableHead>
+            {/* <TableHead>Room</TableHead> */}
             <TableHead>Student Name</TableHead>
             <TableHead>Matric No</TableHead>
             <TableHead>CreatedAt</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
-          <TableRow>
-            <TableCell>1</TableCell>
-            <TableCell>Spoilt Sockets</TableCell>
-            <TableCell>DANIEL</TableCell>
-            <TableCell>D107</TableCell>
-            <TableCell>Victor Balogun</TableCell>
-            <TableCell>19CH026505</TableCell>
-            <TableCell>28/12/2023</TableCell>
-          </TableRow>
+          {personnelResolved?.data?.map((item: any, idx: any) => (
+            <TableRow key={item.id}>
+              <TableCell>{idx + 1}</TableCell>
+              <TableCell>{item.issue}</TableCell>
+              <TableCell>{item.hall}</TableCell>
+              {/* <TableCell>D107</TableCell> */}
+              <TableCell className="h-auto">{`${
+                item?.student?.firstname ?? ''
+              } ${item?.student?.lastname ?? ''}`}</TableCell>
+              <TableCell>{item?.student?.matricNo}</TableCell>
+              <TableCell>{item.createdAt}</TableCell>
+            </TableRow>
+          ))}
         </TableBody>
       </Table>
     )

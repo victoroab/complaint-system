@@ -1,34 +1,52 @@
 import { NextRequest } from 'next/server'
 import prisma from '@/lib/db'
 
-const CATEGORIES = ['ELECTRICAL', 'FURNITURE', 'PLUMBING'] as const
+const HALLS = [
+  'PETER',
+  'PAUL',
+  'JOHN',
+  'JOSEPH',
+  'DANIEL',
+  'ESTHER',
+  'LYDIA',
+  'DEBORAH',
+  'MARY',
+  'DORCAS',
+] as const
 
-type Category = (typeof CATEGORIES)[number]
+type Hall = (typeof HALLS)[number]
 
 export async function GET(request: NextRequest) {
   try {
-    const category = request.headers.get('x-personnel-category')! as Category
+    const hall = request.headers.get('x-staff-hall')! as Hall
 
     const complaints = await prisma.complaints.findMany({
       where: {
-        category,
-        personnelId: null,
+        hall,
+        resolved: true,
       },
-      orderBy: { createdAt: 'desc' },
       select: {
         id: true,
-        hall: true,
-        issue: true,
+        category: true,
         createdAt: true,
+        fixed: true,
+        issue: true,
         student: {
           select: {
-            matricNo: true,
             firstname: true,
             lastname: true,
+            matricNo: true,
             roomNumber: true,
           },
         },
+        handler: {
+          select: {
+            firstname: true,
+            lastname: true,
+          },
+        },
       },
+      orderBy: { createdAt: 'desc' },
     })
 
     return Response.json(complaints)
