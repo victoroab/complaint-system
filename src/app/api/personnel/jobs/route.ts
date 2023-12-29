@@ -15,6 +15,7 @@ export async function GET(request: NextRequest) {
             fixed: false,
           },
           select: {
+            id: true,
             category: true,
             issue: true,
             createdAt: true,

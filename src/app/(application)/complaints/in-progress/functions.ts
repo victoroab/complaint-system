@@ -12,4 +12,20 @@ const getInProgress = async () => {
   }
 }
 
-export { getInProgress }
+const fix = async ({ id }: { id: string }) => {
+  try {
+    await Axios.put(
+      '/personnel/fix-complaint',
+      {
+        id,
+      },
+      {
+        withCredentials: true,
+      }
+    )
+  } catch (e) {
+    console.error(e)
+  }
+}
+
+export { getInProgress, fix }

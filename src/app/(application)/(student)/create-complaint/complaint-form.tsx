@@ -23,6 +23,7 @@ import { Textarea } from '@/components/ui/textarea'
 import { createComplaint } from '../functions'
 import { useMutation } from '@tanstack/react-query'
 import { useRef, useState } from 'react'
+import { toast } from 'sonner'
 
 export function ComplaintForm() {
   const roomRef = useRef<any>(null)
@@ -33,6 +34,7 @@ export function ComplaintForm() {
     mutationFn: createComplaint,
     onSuccess: () => {
       issueRef.current.value = ''
+      toast('Complaint Sent')
     },
   })
 

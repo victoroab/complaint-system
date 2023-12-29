@@ -9,26 +9,44 @@ import {
   TableCell,
 } from '@/components/ui/table'
 import { Button } from '@/components/ui/button'
-import { useQuery } from '@tanstack/react-query'
+import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 import {
   getStudentPending,
   getStaffPending,
   getPersonnelPending,
+  handleComplaint,
 } from './pending/functions'
 import {
   getStaffResolved,
   getStudentResolved,
   getPersonnelResolved,
 } from './resolved/functions'
-import { getInProgress } from './in-progress/function'
+import { fix, getInProgress } from './in-progress/functions'
+import { toast } from 'sonner'
 
 type User = 'STUDENT' | 'PERSONNEL' | 'STAFF'
 
 export function ProgressTableData() {
+  const qC = useQueryClient()
+
   const inProgress = useQuery({
     queryKey: ['inProgress'],
     queryFn: getInProgress,
   })
+
+  const fixMutation = useMutation({
+    mutationFn: fix,
+    onSuccess: () => {
+      toast('Success')
+      qC.invalidateQueries({ queryKey: ['inProgress'] })
+    },
+  })
+
+  function fixComplaint(id: string) {
+    return fixMutation.mutate({
+      id,
+    })
+  }
 
   return (
     <div className="flex">
@@ -59,7 +77,11 @@ export function ProgressTableData() {
 
               <TableCell>{item.createdAt}</TableCell>
               <TableCell>
-                <Button className="rounded-xl" size="sm">
+                <Button
+                  className="rounded-xl"
+                  size="sm"
+                  onClick={() => fixComplaint(item.id)}
+                >
                   Mark Fixed
                 </Button>
               </TableCell>
@@ -72,6 +94,8 @@ export function ProgressTableData() {
 }
 
 export function PendingTableData({ user }: { user: User }) {
+  const queryClient = useQueryClient()
+
   const studentPending = useQuery({
     queryKey: ['studentPending'],
     queryFn: getStudentPending,
@@ -86,6 +110,21 @@ export function PendingTableData({ user }: { user: User }) {
     queryKey: ['personnelPending'],
     queryFn: getPersonnelPending,
   })
+
+  const handleComplaintMutation = useMutation({
+    mutationFn: handleComplaint,
+    onSuccess: () => {
+      toast('Success')
+      queryClient.invalidateQueries({ queryKey: ['personnelPending'] })
+    },
+  })
+
+  function handle(id: string) {
+    return handleComplaintMutation.mutate({
+      id,
+      personnelId: 'clqikar6b00021q4fap9h150c',
+    })
+  }
 
   if (user === 'STUDENT') {
     return (
@@ -133,6 +172,7 @@ export function PendingTableData({ user }: { user: User }) {
       </div>
     )
   }
+
   if (user === 'STAFF') {
     return (
       <div className="flex">
@@ -183,6 +223,7 @@ export function PendingTableData({ user }: { user: User }) {
       </div>
     )
   }
+
   if (user === 'PERSONNEL') {
     return (
       <div className="flex">
@@ -213,7 +254,11 @@ export function PendingTableData({ user }: { user: User }) {
 
                 <TableCell>{item.createdAt}</TableCell>
                 <TableCell>
-                  <Button className="rounded-xl" size="sm">
+                  <Button
+                    className="rounded-xl"
+                    size="sm"
+                    onClick={() => handle(item.id)}
+                  >
                     Handle Complaint
                   </Button>
                 </TableCell>

@@ -36,4 +36,32 @@ const getPersonnelPending = async () => {
   }
 }
 
-export { getStudentPending, getStaffPending, getPersonnelPending }
+const handleComplaint = async ({
+  id,
+  personnelId,
+}: {
+  id: string
+  personnelId: string
+}) => {
+  try {
+    await Axios.put(
+      '/personnel/handle-complaint',
+      {
+        id,
+        personnelId,
+      },
+      {
+        withCredentials: true,
+      }
+    )
+  } catch (e) {
+    console.error(e)
+  }
+}
+
+export {
+  getStudentPending,
+  getStaffPending,
+  getPersonnelPending,
+  handleComplaint,
+}

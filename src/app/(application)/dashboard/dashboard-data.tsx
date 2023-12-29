@@ -135,7 +135,7 @@ export function PersonnelDashboardData() {
           </CardHeader>
           <CardContent className=""></CardContent>
           <CardFooter className="text-muted-foreground">
-            Complaints yet to be resolved
+            Complaints not handled
           </CardFooter>
         </Link>
       </Card>
