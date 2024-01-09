@@ -9,7 +9,7 @@ export default function Page() {
         <div className="mb-5 pb-2 text-muted-foreground text-xl border-b flex justify-between">
           Resolved Complaints
         </div>
-        <ResolvedTableData user="PERSONNEL" />
+        <ResolvedTableData user="STUDENT" />
       </div>
     </section>
   )

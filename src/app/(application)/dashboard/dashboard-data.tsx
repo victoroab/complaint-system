@@ -113,7 +113,7 @@ export function StaffDashboardData() {
           </CardHeader>
           <CardContent className=""></CardContent>
           <CardFooter className="text-muted-foreground">
-            View all complaints
+            View all resolved complaints
           </CardFooter>
         </Link>
       </Card>

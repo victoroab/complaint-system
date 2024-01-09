@@ -59,9 +59,26 @@ const handleComplaint = async ({
   }
 }
 
+const inspectComplaint = async ({id}: {id: string}) => {
+  try {
+    await Axios.put(
+      '/staff/inspect-complaint',
+      {
+        id,
+      },
+      {
+        withCredentials: true,
+      }
+    )
+  } catch (e) {
+    console.error(e)
+  }
+}
+
 export {
   getStudentPending,
   getStaffPending,
   getPersonnelPending,
   handleComplaint,
+  inspectComplaint
 }

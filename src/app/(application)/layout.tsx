@@ -1,3 +1,4 @@
+import { AuthProvider } from '../../auth/AuthProvider'
 import { LayoutNav } from './layout-nav'
 
 export default function DashboardLayout({
@@ -5,5 +6,9 @@ export default function DashboardLayout({
 }: {
   children: React.ReactNode
 }) {
-  return <LayoutNav>{children}</LayoutNav>
+  return (
+    <AuthProvider>
+      <LayoutNav>{children}</LayoutNav>
+    </AuthProvider>
+  )
 }

@@ -12,7 +12,7 @@ export default function Page() {
         <div className="mb-5 pb-2 text-muted-foreground text-xl border-b flex justify-between">
           Dashboard <UserDetails />
         </div>
-        <PersonnelDashboardData />
+        <StudentDashboardData />
       </div>
     </section>
   )

@@ -8,6 +8,12 @@ import {
   TableRow,
   TableCell,
 } from '@/components/ui/table'
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from '@/components/ui/tooltip'
 import { Button } from '@/components/ui/button'
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 import {
@@ -15,6 +21,7 @@ import {
   getStaffPending,
   getPersonnelPending,
   handleComplaint,
+  inspectComplaint,
 } from './pending/functions'
 import {
   getStaffResolved,
@@ -119,6 +126,20 @@ export function PendingTableData({ user }: { user: User }) {
     },
   })
 
+  const inspectMutation = useMutation({
+    mutationFn: inspectComplaint,
+    onSuccess: () => {
+      toast('Success')
+      queryClient.invalidateQueries({ queryKey: ['staffPending'] })
+    },
+  })
+
+  function inspect(id: string) {
+    return inspectMutation.mutate({
+      id,
+    })
+  }
+
   function handle(id: string) {
     return handleComplaintMutation.mutate({
       id,
@@ -161,9 +182,25 @@ export function PendingTableData({ user }: { user: User }) {
                 </TableCell>
                 <TableCell className="h-auto">{item.createdAt}</TableCell>
                 <TableCell className="h-auto">
-                  <Button className="rounded-xl" size="sm">
-                    Notify Hall Officer
-                  </Button>
+                  <TooltipProvider>
+                    <Tooltip>
+                      <TooltipTrigger>
+                        <Button
+                          className="rounded-xl"
+                          size="sm"
+                          disabled={item.fixed === false}
+                        >
+                          Notify Hall Officer
+                        </Button>
+                      </TooltipTrigger>
+                      <TooltipContent>
+                        <p>
+                          You can notify when item has been fixed by the
+                          personnel
+                        </p>
+                      </TooltipContent>
+                    </Tooltip>
+                  </TooltipProvider>
                 </TableCell>
               </TableRow>
             ))}
@@ -212,6 +249,7 @@ export function PendingTableData({ user }: { user: User }) {
                     className="rounded-xl"
                     size="sm"
                     disabled={item.fixed === false}
+                    onClick={() => inspect(item.id)}
                   >
                     Mark Inspected
                   </Button>

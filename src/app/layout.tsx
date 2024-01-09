@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'
 import { ThemeProvider } from '@/components/theme-provider'
+import { AuthProvider } from '../auth/AuthProvider'
 import { ReactQueryProvider } from './ReactQueryProvider'
 import { Toaster } from '@/components/ui/sonner'
 
@@ -26,7 +27,9 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <body className={inter.className}>{children}</body>
+          <body className={inter.className}>
+            <AuthProvider>{children}</AuthProvider>
+          </body>
           <Toaster />
         </ThemeProvider>
       </html>
