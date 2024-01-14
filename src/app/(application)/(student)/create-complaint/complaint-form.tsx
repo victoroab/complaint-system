@@ -24,8 +24,11 @@ import { createComplaint } from '../functions'
 import { useMutation } from '@tanstack/react-query'
 import { useRef, useState } from 'react'
 import { toast } from 'sonner'
+import { useGetEmail } from '@/auth/useAuth'
 
 export function ComplaintForm() {
+  const email = useGetEmail()
+
   const roomRef = useRef<any>(null)
   const issueRef = useRef<any>(null)
   const [category, setCategory] = useState<string>('')
@@ -42,7 +45,7 @@ export function ComplaintForm() {
     return complaintMutation.mutate({
       hall: 'DANIEL',
       category: category,
-      email: 'test@test',
+      email,
       issue: issueRef.current.value,
     })
   }

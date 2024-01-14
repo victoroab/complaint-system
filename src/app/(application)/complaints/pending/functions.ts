@@ -1,10 +1,10 @@
 import { Axios } from '@/lib/axios'
 
-const getStudentPending = async () => {
+const getStudentPending = async (email: string) => {
   try {
     const pending = await Axios.get('/student/get-pending', {
       withCredentials: true,
-      headers: { 'x-user-email': 'test@test' },
+      headers: { 'x-user-email': email },
     })
     return pending.data
   } catch (e) {
@@ -59,7 +59,7 @@ const handleComplaint = async ({
   }
 }
 
-const inspectComplaint = async ({id}: {id: string}) => {
+const inspectComplaint = async ({ id }: { id: string }) => {
   try {
     await Axios.put(
       '/staff/inspect-complaint',
@@ -80,5 +80,5 @@ export {
   getStaffPending,
   getPersonnelPending,
   handleComplaint,
-  inspectComplaint
+  inspectComplaint,
 }

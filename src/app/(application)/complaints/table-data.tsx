@@ -30,15 +30,17 @@ import {
 } from './resolved/functions'
 import { fix, getInProgress } from './in-progress/functions'
 import { toast } from 'sonner'
+import { useGetEmail } from '@/auth/useAuth'
 
-type User = 'STUDENT' | 'PERSONNEL' | 'STAFF'
+export type User = 'STUDENT' | 'PERSONNEL' | 'STAFF'
 
 export function ProgressTableData() {
+  const email = useGetEmail()
   const qC = useQueryClient()
 
   const inProgress = useQuery({
     queryKey: ['inProgress'],
-    queryFn: getInProgress,
+    queryFn: () => getInProgress(email),
   })
 
   const fixMutation = useMutation({
@@ -101,11 +103,12 @@ export function ProgressTableData() {
 }
 
 export function PendingTableData({ user }: { user: User }) {
+  const email = useGetEmail()
   const queryClient = useQueryClient()
 
   const studentPending = useQuery({
     queryKey: ['studentPending'],
-    queryFn: getStudentPending,
+    queryFn: () => getStudentPending(email),
   })
 
   const staffPending = useQuery({
@@ -310,9 +313,11 @@ export function PendingTableData({ user }: { user: User }) {
 }
 
 export function ResolvedTableData({ user }: { user: User }) {
+  const email = useGetEmail()
+
   const studentResolved = useQuery({
     queryKey: ['studentResolved'],
-    queryFn: getStudentResolved,
+    queryFn: () => getStudentResolved(email),
   })
 
   const staffResolved = useQuery({
@@ -322,7 +327,7 @@ export function ResolvedTableData({ user }: { user: User }) {
 
   const personnelResolved = useQuery({
     queryKey: ['personnelResolved'],
-    queryFn: getPersonnelResolved,
+    queryFn: () => getPersonnelResolved(email),
   })
 
   if (user === 'STUDENT') {

@@ -1,10 +1,10 @@
 import { Axios } from '@/lib/axios'
 
-const getInProgress = async () => {
+const getInProgress = async (email: string) => {
   try {
     const pending = await Axios.get('/personnel/jobs', {
       withCredentials: true,
-      headers: { 'x-personnel-email': 'test@personnel' },
+      headers: { 'x-personnel-email': email },
     })
     return pending.data
   } catch (e) {

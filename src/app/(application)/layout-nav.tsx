@@ -1,3 +1,5 @@
+'use client'
+
 import { Settings, LogOutIcon, LockKeyhole } from 'lucide-react'
 import { ModeToggle } from '@/components/mode-toggle'
 import {
@@ -14,8 +16,26 @@ import {
 } from '@/components/ui/drawer'
 import { Label } from '@/components/ui/label'
 import Link from 'next/link'
+import { useRouter } from 'next/navigation'
+import { supabase } from '@/lib/auth'
+import { useAuth } from '@/auth/useAuth'
 
 export function LayoutNav({ children }: { children: React.ReactNode }) {
+  useAuth()
+
+  const router = useRouter()
+
+  async function signOut() {
+    await supabase.auth.signOut()
+
+    if (typeof window !== 'undefined' && window.localStorage) {
+      localStorage.removeItem('session_key')
+      localStorage.removeItem('user_type')
+    }
+
+    router.replace('/')
+  }
+
   return (
     <>
       <header className="border-b w-full items-center py-6 px-8 justify-between sm:hidden flex h-10">
@@ -92,7 +112,7 @@ export function LayoutNav({ children }: { children: React.ReactNode }) {
 
             <TooltipProvider>
               <Tooltip>
-                <TooltipTrigger>
+                <TooltipTrigger onClick={() => signOut()}>
                   <LogOutIcon className="cursor-pointer" />
                 </TooltipTrigger>
                 <TooltipContent>

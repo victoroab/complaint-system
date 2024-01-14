@@ -14,10 +14,10 @@ export function LoginForm({ userType }: { userType: string }) {
   const passwordRef = useRef<any>(null)
 
   async function signInWithEmail() {
-    // const { data, error } = await supabase.auth.signInWithPassword({
-    //   email: emailRef?.current?.value,
-    //   password: passwordRef?.current?.value,
-    // })
+    const { data, error } = await supabase.auth.signInWithPassword({
+      email: emailRef?.current?.value,
+      password: passwordRef?.current?.value,
+    })
 
     if (typeof window !== 'undefined' && window.localStorage) {
       localStorage.setItem('user_type', JSON.stringify(userType))

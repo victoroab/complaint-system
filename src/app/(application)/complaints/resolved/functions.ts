@@ -1,10 +1,10 @@
 import { Axios } from '@/lib/axios'
 
-const getStudentResolved = async () => {
+const getStudentResolved = async (email: string) => {
   try {
     const resolved = await Axios.get('/student/get-resolved', {
       withCredentials: true,
-      headers: { 'x-user-email': 'test@test' },
+      headers: { 'x-user-email': email },
     })
     return resolved.data
   } catch (e) {
@@ -24,11 +24,11 @@ const getStaffResolved = async () => {
   }
 }
 
-const getPersonnelResolved = async () => {
+const getPersonnelResolved = async (email: string) => {
   try {
     const resolved = await Axios.get('/personnel/personnel-resolved', {
       withCredentials: true,
-      headers: { 'x-personnel-email': 'test@personnel' },
+      headers: { 'x-personnel-email': email },
     })
     return resolved.data
   } catch (e) {

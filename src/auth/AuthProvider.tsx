@@ -11,12 +11,28 @@ type Props = {
 
 export const AuthProvider = ({ children }: Props) => {
   const [loading, setLoading] = useState(true)
+  // fetch the user type from local storage and sign out if not found or null
+
+  async function checkUserType() {
+    if (typeof window !== 'undefined' && window.localStorage) {
+      !JSON.parse(localStorage.getItem('user_type')!) ??
+        (await supabase.auth.signOut())
+    }
+  }
+
+  checkUserType()
 
   useEffect(() => {
     setLoading(true)
     supabase.auth.getSession().then(({ data: { session } }) => {
       if (typeof window !== 'undefined' && window.localStorage) {
-        localStorage.setItem('session_key', JSON.stringify(session))
+        localStorage.setItem(
+          'session_key',
+          JSON.stringify({
+            access_token: session?.access_token,
+            email: session?.user.email,
+          })
+        )
       }
     })
 
@@ -24,7 +40,13 @@ export const AuthProvider = ({ children }: Props) => {
       data: { subscription },
     } = supabase.auth.onAuthStateChange((_event, session) => {
       if (typeof window !== 'undefined' && window.localStorage) {
-        localStorage.setItem('session_key', JSON.stringify(session))
+        localStorage.setItem(
+          'session_key',
+          JSON.stringify({
+            access_token: session?.access_token,
+            email: session?.user.email,
+          })
+        )
       }
     })
 
@@ -33,10 +55,13 @@ export const AuthProvider = ({ children }: Props) => {
     return () => subscription.unsubscribe()
   }, [])
 
-  let session
+  let session, userType
 
   if (typeof window !== 'undefined' && window.localStorage) {
     session = JSON.parse(localStorage.getItem('session_key')!)
+    userType = JSON.parse(localStorage.getItem('user_type')!)
+
+    session = { ...session, userType }
   }
 
   return (

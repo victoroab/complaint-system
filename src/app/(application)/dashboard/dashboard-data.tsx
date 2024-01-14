@@ -14,24 +14,6 @@ import {
 } from '@radix-ui/react-icons'
 import Link from 'next/link'
 
-export function UserDetails({
-  firstname,
-  lastname,
-  hall,
-  roomNumber,
-}: {
-  firstname?: string
-  lastname?: string
-  hall?: string
-  roomNumber?: string
-}) {
-  return (
-    <span className="text-primary ml-6 text-lg">
-      Victor Balogun - D107 - Daniel
-    </span>
-  )
-}
-
 export function StudentDashboardData() {
   return (
     <div className="flex gap-4 items-start flex-wrap dark:text-secondary-foreground">
