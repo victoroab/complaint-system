@@ -10,19 +10,15 @@ import {
 import {
   NavigationMenu,
   NavigationMenuItem,
-  NavigationMenuLink,
   NavigationMenuList,
-  navigationMenuTriggerStyle,
 } from '@/components/ui/navigation-menu'
 import { EnterIcon } from '@radix-ui/react-icons'
-import Link from 'next/link'
-import { useRouter, redirect } from 'next/navigation'
-import { useContext } from 'react'
-import { AuthContext } from '@/auth/AuthProvider'
-
+import {
+  PersonnelSignInButton,
+  StaffSignInButton,
+  StudentSignInButton,
+} from './sign-in/buttons'
 export default function Home() {
-  const router = useRouter()
-
   return (
     <main className="flex min-h-screen items-center justify-center p-4">
       <div className="border rounded-xl h-auto p-6">
@@ -39,32 +35,14 @@ export default function Home() {
           <CardContent className="pt-4 cursor-pointer">
             <NavigationMenu>
               <NavigationMenuList className="flex gap-7 flex-wrap">
-                <NavigationMenuItem
-                  onClick={() => router.replace('/sign-in/student')}
-                >
-                  <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-                    Student
-                  </NavigationMenuLink>
-                  {/* <Link href="/sign-in/student">
-                  </Link> */}
+                <NavigationMenuItem>
+                  <StudentSignInButton />
                 </NavigationMenuItem>
-                <NavigationMenuItem
-                  onClick={() => router.replace('/sign-in/staff')}
-                >
-                  <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-                    Staff
-                  </NavigationMenuLink>
-                  {/* <Link href="/sign-in/staff">
-                  </Link> */}
+                <NavigationMenuItem>
+                  <StaffSignInButton />
                 </NavigationMenuItem>
-                <NavigationMenuItem
-                  onClick={() => router.replace('/sign-in/personnel')}
-                >
-                  <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-                    Personnel
-                  </NavigationMenuLink>
-                  {/* <Link href="/sign-in/personnel">
-                  </Link> */}
+                <NavigationMenuItem>
+                  <PersonnelSignInButton />
                 </NavigationMenuItem>
               </NavigationMenuList>
             </NavigationMenu>

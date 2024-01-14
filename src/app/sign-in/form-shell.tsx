@@ -6,7 +6,7 @@ import {
   CardHeader,
 } from '@/components/ui/card'
 import { LockKeyhole } from 'lucide-react'
-import { BackButton } from './back-button'
+import { BackButton } from './buttons'
 
 export function FormShell({
   user,
