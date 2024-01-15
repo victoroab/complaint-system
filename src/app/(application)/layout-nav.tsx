@@ -1,5 +1,7 @@
 'use client'
 
+import Image from 'next/image'
+import logo from '../../../public/logo.webp'
 import { Settings, LogOutIcon, LockKeyhole } from 'lucide-react'
 import { ModeToggle } from '@/components/mode-toggle'
 import {
@@ -22,6 +24,7 @@ import { useAuth } from '@/auth/useAuth'
 
 export function LayoutNav({ children }: { children: React.ReactNode }) {
   useAuth()
+  // use .env to determine the behaviour of the auth hook
 
   const router = useRouter()
 
@@ -39,7 +42,15 @@ export function LayoutNav({ children }: { children: React.ReactNode }) {
   return (
     <>
       <header className="border-b w-full items-center py-6 px-8 justify-between sm:hidden flex h-10">
-        <Link href="/dashboard">LOGO</Link>
+        <Link href="/dashboard" className="cursor-pointer">
+          <Image
+            src={logo}
+            alt="logo"
+            width={35}
+            height={35}
+            className="rounded-3xl"
+          />
+        </Link>
 
         <div className="flex gap-3 flex-wrap items-center justify-center">
           <TooltipProvider>
@@ -84,8 +95,16 @@ export function LayoutNav({ children }: { children: React.ReactNode }) {
       </header>
       <section className="min-h-screen flex w-full">
         <nav className="h-screen hidden flex-col justify-between items-center border p-4 sm:flex sm:flex-wrap">
-          <div className="py-3 flex items-center justify-center w-full">
-            <Link href="/dashboard">LOGO</Link>
+          <div className="py-3 flex items-center justify-center w-full cursor-pointer">
+            <Link href="/dashboard">
+              <Image
+                src={logo}
+                alt="logo"
+                width={45}
+                height={45}
+                className="rounded-3xl"
+              />
+            </Link>
           </div>
           <TooltipProvider>
             <Tooltip>
