@@ -12,11 +12,11 @@ const getStudentPending = async (email: string) => {
   }
 }
 
-const getStaffPending = async () => {
+const getStaffPending = async (hall: string) => {
   try {
     const pending = await Axios.get('/staff/staff-complaints', {
       withCredentials: true,
-      headers: { 'x-staff-hall': 'DANIEL' },
+      headers: { 'x-staff-hall': hall },
     })
     return pending.data
   } catch (e) {
@@ -24,11 +24,25 @@ const getStaffPending = async () => {
   }
 }
 
-const getPersonnelPending = async () => {
+const getPersonnelCategory = async (email: string) => {
+  try {
+    const category = await Axios.get(
+      `/personnel/get-personnel-category?email=${email}`,
+      {
+        withCredentials: true,
+      }
+    )
+    return category.data
+  } catch (e) {
+    console.error(e)
+  }
+}
+
+const getPersonnelPending = async (category: string) => {
   try {
     const pending = await Axios.get('/personnel/personnel-complaints', {
       withCredentials: true,
-      headers: { 'x-personnel-category': 'ELECTRICAL' },
+      headers: { 'x-personnel-category': category },
     })
     return pending.data
   } catch (e) {
@@ -38,17 +52,17 @@ const getPersonnelPending = async () => {
 
 const handleComplaint = async ({
   id,
-  personnelId,
+  email,
 }: {
   id: string
-  personnelId: string
+  email: string
 }) => {
   try {
     await Axios.put(
       '/personnel/handle-complaint',
       {
         id,
-        personnelId,
+        email,
       },
       {
         withCredentials: true,
@@ -78,6 +92,7 @@ const inspectComplaint = async ({ id }: { id: string }) => {
 export {
   getStudentPending,
   getStaffPending,
+  getPersonnelCategory,
   getPersonnelPending,
   handleComplaint,
   inspectComplaint,

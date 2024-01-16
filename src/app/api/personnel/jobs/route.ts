@@ -13,6 +13,7 @@ export async function GET(request: NextRequest) {
         complaints: {
           where: {
             fixed: false,
+            handler: { email },
           },
           select: {
             id: true,

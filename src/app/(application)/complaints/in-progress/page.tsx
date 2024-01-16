@@ -1,5 +1,6 @@
 'use client'
 
+import { BackButton } from '../../back-button'
 import { ProgressTableData } from '../table-data'
 
 export default function Page() {
@@ -8,6 +9,7 @@ export default function Page() {
       <div className="w-full h-full flex flex-col">
         <div className="mb-5 pb-2 text-muted-foreground text-xl border-b flex justify-between">
           In Progress
+          <BackButton />
         </div>
         <ProgressTableData />
       </div>

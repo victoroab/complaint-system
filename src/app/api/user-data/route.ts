@@ -39,6 +39,7 @@ export async function GET(request: NextRequest) {
           select: {
             firstname: true,
             lastname: true,
+            category: true,
           },
         })
         break

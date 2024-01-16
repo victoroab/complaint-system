@@ -1,3 +1,5 @@
+'use client'
+
 import {
   Card,
   CardContent,
@@ -7,6 +9,7 @@ import {
 } from '@/components/ui/card'
 import { LockKeyhole } from 'lucide-react'
 import { BackButton } from './buttons'
+import { usePreventDoubleSignIn } from '@/auth/useAuth'
 
 export function FormShell({
   user,
@@ -15,6 +18,7 @@ export function FormShell({
   user: string
   children: React.ReactNode
 }) {
+  usePreventDoubleSignIn()
   return (
     <main className="flex min-h-screen items-center justify-center p-4">
       <div className="border rounded-xl h-auto p-5">

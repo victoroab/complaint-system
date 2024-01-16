@@ -3,11 +3,11 @@ import prisma from '@/lib/db'
 
 export async function PUT(request: NextRequest) {
   try {
-    const { id, personnelId } = await request.json()
+    const { id, email } = await request.json()
 
     await prisma.complaints.update({
       where: { id },
-      data: { personnelId },
+      data: { handler: { connect: { email } } },
     })
 
     return Response.json('Done')

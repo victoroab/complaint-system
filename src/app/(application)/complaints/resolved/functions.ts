@@ -12,11 +12,22 @@ const getStudentResolved = async (email: string) => {
   }
 }
 
-const getStaffResolved = async () => {
+const getStaffHall = async (email: string) => {
+  try {
+    const resolved = await Axios.get(`/staff/get-hall?email=${email}`, {
+      withCredentials: true,
+    })
+    return resolved.data
+  } catch (e) {
+    console.error(e)
+  }
+}
+
+const getStaffResolved = async (hall: string) => {
   try {
     const resolved = await Axios.get('/staff/staff-resolved', {
       withCredentials: true,
-      headers: { 'x-staff-hall': 'JOHN' },
+      headers: { 'x-staff-hall': hall },
     })
     return resolved.data
   } catch (e) {
@@ -36,4 +47,9 @@ const getPersonnelResolved = async (email: string) => {
   }
 }
 
-export { getStudentResolved, getStaffResolved, getPersonnelResolved }
+export {
+  getStudentResolved,
+  getStaffHall,
+  getStaffResolved,
+  getPersonnelResolved,
+}

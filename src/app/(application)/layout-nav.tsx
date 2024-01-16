@@ -16,15 +16,26 @@ import {
   DrawerHeader,
   DrawerTrigger,
 } from '@/components/ui/drawer'
+import {
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from '@/components/ui/dialog'
+
 import { Label } from '@/components/ui/label'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { supabase } from '@/lib/auth'
 import { useAuth } from '@/auth/useAuth'
+import { Button } from '@/components/ui/button'
 
 export function LayoutNav({ children }: { children: React.ReactNode }) {
+  // use .env to determine the behaviour of the useAuth() hook
   useAuth()
-  // use .env to determine the behaviour of the auth hook
 
   const router = useRouter()
 
@@ -36,7 +47,7 @@ export function LayoutNav({ children }: { children: React.ReactNode }) {
       localStorage.removeItem('user_type')
     }
 
-    router.replace('/')
+    router.refresh()
   }
 
   return (
@@ -94,7 +105,7 @@ export function LayoutNav({ children }: { children: React.ReactNode }) {
         </div>
       </header>
       <section className="min-h-screen flex w-full">
-        <nav className="h-screen hidden flex-col justify-between items-center border p-4 sm:flex sm:flex-wrap">
+        <nav className="h-screen hidden flex-col justify-between items-center border py-8 px-4 sm:flex sm:flex-wrap">
           <div className="py-3 flex items-center justify-center w-full cursor-pointer">
             <Link href="/dashboard">
               <Image
@@ -129,16 +140,43 @@ export function LayoutNav({ children }: { children: React.ReactNode }) {
               </Tooltip>
             </TooltipProvider>
 
-            <TooltipProvider>
-              <Tooltip>
-                <TooltipTrigger onClick={() => signOut()}>
-                  <LogOutIcon className="cursor-pointer" />
-                </TooltipTrigger>
-                <TooltipContent>
-                  <p>Sign Out</p>
-                </TooltipContent>
-              </Tooltip>
-            </TooltipProvider>
+            <Dialog>
+              <DialogTrigger>
+                <TooltipProvider>
+                  <Tooltip>
+                    <TooltipTrigger>
+                      <Button className="rounded-xl">
+                        <LogOutIcon className="cursor-pointer" />
+                      </Button>
+                    </TooltipTrigger>
+                    <TooltipContent>
+                      <p>Sign Out</p>
+                    </TooltipContent>
+                  </Tooltip>
+                </TooltipProvider>
+              </DialogTrigger>
+              <DialogContent>
+                <DialogHeader>
+                  <DialogTitle>Sign Out?</DialogTitle>
+                  <DialogDescription>
+                    This will sign you out of the system.
+                  </DialogDescription>
+                </DialogHeader>
+                <div className="flex items-center justify-center gap-4">
+                  <DialogClose asChild>
+                    <Button className="w-full rounded-xl" variant="secondary">
+                      Go Back
+                    </Button>
+                  </DialogClose>
+                  <Button
+                    className="w-full rounded-xl"
+                    onClick={() => signOut()}
+                  >
+                    Yes
+                  </Button>
+                </div>
+              </DialogContent>
+            </Dialog>
           </div>
         </nav>
         {children}

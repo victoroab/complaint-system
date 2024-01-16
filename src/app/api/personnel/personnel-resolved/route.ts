@@ -11,6 +11,9 @@ export async function GET(request: NextRequest) {
       },
       select: {
         complaints: {
+          where: {
+            fixed: true,
+          },
           select: {
             category: true,
             issue: true,

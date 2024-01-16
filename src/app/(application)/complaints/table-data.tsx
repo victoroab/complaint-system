@@ -22,15 +22,17 @@ import {
   getPersonnelPending,
   handleComplaint,
   inspectComplaint,
+  getPersonnelCategory,
 } from './pending/functions'
 import {
   getStaffResolved,
   getStudentResolved,
   getPersonnelResolved,
+  getStaffHall,
 } from './resolved/functions'
 import { fix, getInProgress } from './in-progress/functions'
 import { toast } from 'sonner'
-import { useGetEmail } from '@/auth/useAuth'
+import { useGetEmail, useGetUserType } from '@/auth/useAuth'
 import { SkeletonTable } from './skeleton-table'
 
 export type User = 'STUDENT' | 'PERSONNEL' | 'STAFF'
@@ -109,21 +111,37 @@ export function ProgressTableData() {
 
 export function PendingTableData({ user }: { user: User }) {
   const email = useGetEmail()
+  const userType = useGetUserType()
   const queryClient = useQueryClient()
 
   const studentPending = useQuery({
     queryKey: ['studentPending'],
     queryFn: () => getStudentPending(email),
+    enabled: !!(userType === 'STUDENT'),
+  })
+
+  const staffHall = useQuery({
+    queryKey: ['staffHall'],
+    queryFn: () => getStaffHall(email),
+    enabled: !!(userType === 'STAFF'),
   })
 
   const staffPending = useQuery({
     queryKey: ['staffPending'],
-    queryFn: getStaffPending,
+    queryFn: () => getStaffPending(staffHall?.data),
+    enabled: !!staffHall.data && !!(userType === 'STAFF'),
+  })
+
+  const category = useQuery({
+    queryKey: ['personnelCategory'],
+    queryFn: () => getPersonnelCategory(email),
+    enabled: !!(userType === 'PERSONNEL'),
   })
 
   const personnelPending = useQuery({
     queryKey: ['personnelPending'],
-    queryFn: getPersonnelPending,
+    queryFn: () => getPersonnelPending(category?.data),
+    enabled: !!category.data && userType === 'PERSONNEL',
   })
 
   const handleComplaintMutation = useMutation({
@@ -151,7 +169,7 @@ export function PendingTableData({ user }: { user: User }) {
   function handle(id: string) {
     return handleComplaintMutation.mutate({
       id,
-      personnelId: 'clqikar6b00021q4fap9h150c',
+      email,
     })
   }
 
@@ -331,20 +349,30 @@ export function PendingTableData({ user }: { user: User }) {
 
 export function ResolvedTableData({ user }: { user: User }) {
   const email = useGetEmail()
+  const userType = useGetUserType()
 
   const studentResolved = useQuery({
     queryKey: ['studentResolved'],
     queryFn: () => getStudentResolved(email),
+    enabled: !!(userType === 'STUDENT'),
+  })
+
+  const staffHall = useQuery({
+    queryKey: ['staffHall'],
+    queryFn: () => getStaffHall(email),
+    enabled: !!(userType === 'STAFF'),
   })
 
   const staffResolved = useQuery({
     queryKey: ['staffResolved'],
-    queryFn: getStaffResolved,
+    queryFn: () => getStaffResolved(staffHall?.data),
+    enabled: !!staffHall?.data && !!(userType === 'STAFF'),
   })
 
   const personnelResolved = useQuery({
     queryKey: ['personnelResolved'],
     queryFn: () => getPersonnelResolved(email),
+    enabled: !!(userType === 'PERSONNEL'),
   })
 
   if (user === 'STUDENT') {
@@ -365,6 +393,7 @@ export function ResolvedTableData({ user }: { user: User }) {
               </TableRow>
             </TableHeader>
             <TableBody>
+              {/* {userType === 'STUDENT' ??}  */}
               {studentResolved?.data?.map((item: any, idx: any) => (
                 <TableRow key={item.id}>
                   <TableCell>{idx + 1}</TableCell>
@@ -386,7 +415,7 @@ export function ResolvedTableData({ user }: { user: User }) {
   if (user === 'STAFF') {
     return (
       <div className="flex">
-        {studentResolved.isLoading ? (
+        {staffResolved.isLoading ? (
           <SkeletonTable />
         ) : (
           <Table>

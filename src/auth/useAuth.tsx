@@ -13,6 +13,14 @@ export function useAuth() {
   }
 }
 
+export function usePreventDoubleSignIn() {
+  const session: Session = useContext(AuthContext)
+
+  if (session.access_token) {
+    redirect('/dashboard')
+  }
+}
+
 export function useGetEmail() {
   const session: Session = useContext(AuthContext)
   return session?.email

@@ -18,7 +18,9 @@ import {
   StaffSignInButton,
   StudentSignInButton,
 } from './sign-in/buttons'
+import { usePreventDoubleSignIn } from '@/auth/useAuth'
 export default function Home() {
+  usePreventDoubleSignIn()
   return (
     <main className="flex min-h-screen items-center justify-center p-4">
       <div className="border rounded-xl h-auto p-6">

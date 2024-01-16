@@ -21,13 +21,11 @@ export function UserDetails() {
       {userData.isLoading ? (
         <Skeleton className="w-56 h-4 rounded-sm" />
       ) : (
-        `${userData?.data?.firstname} ${userData?.data?.lastname}, ${
-          userType === 'student' ? userData?.data?.roomNumber : ''
-        } - ${
-          userData?.data?.hall?.toLowerCase()
-            ? userData?.data?.hall?.toLowerCase()
-            : ''
-        } Hall`
+        `${userData?.data?.firstname} ${userData?.data?.lastname} ${
+          userData?.data?.hall ? userData?.data?.hall : ''
+        } ${userType !== 'personnel' ? 'HALL' : ''} ${
+          userType === 'personnel' ? userData?.data?.category : ''
+        } `
       )}
     </span>
   )

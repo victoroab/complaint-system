@@ -4,7 +4,7 @@ import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { User, KeyRound } from 'lucide-react'
 import { useRouter } from 'next/navigation'
-import { useRef } from 'react'
+import { FormEvent, useRef } from 'react'
 import { supabase } from '@/lib/auth'
 
 export function LoginForm({ userType }: { userType: string }) {
@@ -25,8 +25,13 @@ export function LoginForm({ userType }: { userType: string }) {
 
     router.replace('/dashboard')
   }
+
+  async function onSubmit(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault()
+    await signInWithEmail()
+  }
   return (
-    <div className="flex flex-col p-6 gap-5 w-full">
+    <form className="flex flex-col p-6 gap-5 w-full" onSubmit={onSubmit}>
       <span className="flex items-center gap-3">
         <User className="max-[530px]:hidden" />
         <Input placeholder="email" ref={emailRef} />
@@ -35,12 +40,9 @@ export function LoginForm({ userType }: { userType: string }) {
         <KeyRound className="max-[530px]:hidden" />
         <Input placeholder="password" type="password" ref={passwordRef} />
       </span>
-      <Button
-        className="flex items-center gap-3 mt-2 rounded-xl"
-        onClick={() => signInWithEmail()}
-      >
+      <Button className="flex items-center gap-3 mt-2 rounded-xl" type="submit">
         Sign in
       </Button>
-    </div>
+    </form>
   )
 }
