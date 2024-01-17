@@ -30,12 +30,13 @@ import { Label } from '@/components/ui/label'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { supabase } from '@/lib/auth'
-import { useAuth } from '@/auth/useAuth'
+import { useAuth, usePreventDoubleSignIn } from '@/auth/useAuth'
 import { Button } from '@/components/ui/button'
 
 export function LayoutNav({ children }: { children: React.ReactNode }) {
   // use .env to determine the behaviour of the useAuth() hook
   useAuth()
+  // usePreventDoubleSignIn()
 
   const router = useRouter()
 
