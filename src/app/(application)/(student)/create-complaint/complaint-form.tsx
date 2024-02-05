@@ -18,8 +18,8 @@ import {
   SelectValue,
 } from '@/components/ui/select'
 import { Textarea } from '@/components/ui/textarea'
-import { createComplaint } from '../functions'
-import { useMutation } from '@tanstack/react-query'
+import { createComplaint, getStudentHall } from '../functions'
+import { useMutation, useQuery } from '@tanstack/react-query'
 import { toast } from 'sonner'
 import { useGetEmail } from '@/auth/useAuth'
 
@@ -65,12 +65,18 @@ export function ComplaintForm() {
 
 export function FormFields() {
   const email = useGetEmail()
-  // const router = useRouter()
+  const router = useRouter()
+
+  const studentHall = useQuery({
+    queryKey: ['studentHall'],
+    queryFn: () => getStudentHall({ email }),
+  })
 
   const complaintMutation = useMutation({
     mutationFn: createComplaint,
     onSuccess: () => {
       toast('Complaint Sent')
+      router.push('/complaints/pending')
     },
   })
 
@@ -79,14 +85,16 @@ export function FormFields() {
   })
 
   function onSubmit(values: z.infer<typeof formSchema>) {
+    if (!studentHall.data) {
+      throw new Error('Invalid Hall name')
+    }
+
     complaintMutation.mutate({
-      hall: 'JOHN',
+      hall: studentHall.data.hall,
       category: values.category,
       email,
       issue: values.issue,
     })
-
-    // complaintMutation.isSuccess ?? form.reset()
   }
 
   return (
@@ -153,19 +161,3 @@ export function FormFields() {
     </Form>
   )
 }
-
-// <form
-// onSubmit={handleSubmit(onSubmit)}
-// className="w-40 h-40 flex flex-col gap-6 items-center justify-center"
-// >
-// <input {...register('room')} type="text" />
-// {errors.room && <div className="text-red-300">{errors.room.message}</div>}
-// <select {...register('category')} id="cars">
-//   <option value="volvo">Volvo</option>
-//   <option value="saab">Saab</option>
-//   <option value="mercedes">Mercedes</option>
-//   <option value="audi">Audi</option>
-// </select>
-// <textarea {...register('issue')} />
-// <button type="submit">submit</button>
-// </form>
