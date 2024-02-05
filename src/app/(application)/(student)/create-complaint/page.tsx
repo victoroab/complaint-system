@@ -12,6 +12,7 @@ export default function Page() {
 
         <div className="flex items-center justify-center w-full">
           <ComplaintForm />
+          {/* <ComplaintFormTwo /> */}
         </div>
       </div>
     </section>
