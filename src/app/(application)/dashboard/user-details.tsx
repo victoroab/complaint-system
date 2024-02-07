@@ -17,13 +17,13 @@ export function UserDetails() {
   })
 
   return (
-    <span className="text-primary ml-6 text-lg">
+    <span className="text-secondary-foreground ml-6 text-md">
       {userData.isLoading ? (
         <Skeleton className="w-56 h-4 rounded-sm" />
       ) : (
         `${userData?.data?.firstname} ${userData?.data?.lastname} ${
-          userData?.data?.hall ? userData?.data?.hall : ''
-        } ${userType !== 'personnel' ? 'HALL' : ''} ${
+          userData?.data?.hall ? '- ' + userData?.data?.hall.toLowerCase() : ''
+        } ${userType !== 'personnel' ? 'hall' : ''} ${
           userType === 'personnel' ? userData?.data?.category : ''
         } `
       )}

@@ -30,14 +30,12 @@ import { Label } from '@/components/ui/label'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { supabase } from '@/lib/auth'
-import { useAuth, usePreventDoubleSignIn } from '@/auth/useAuth'
+import { useAuth } from '@/auth/useAuth'
 import { Button } from '@/components/ui/button'
 
 export function LayoutNav({ children }: { children: React.ReactNode }) {
   // use .env to determine the behaviour of the useAuth() hook
   useAuth()
-  // usePreventDoubleSignIn()
-
   const router = useRouter()
 
   async function signOut() {
@@ -53,7 +51,7 @@ export function LayoutNav({ children }: { children: React.ReactNode }) {
 
   return (
     <>
-      <header className="border-b w-full items-center py-6 px-8 justify-between sm:hidden flex h-10">
+      <header className="border-b-2 w-full items-center py-4 px-8 justify-between flex sm:hidden bg-muted">
         <Link href="/dashboard" className="cursor-pointer">
           <Image
             src={logo}
@@ -106,7 +104,7 @@ export function LayoutNav({ children }: { children: React.ReactNode }) {
         </div>
       </header>
       <section className="min-h-screen flex w-full">
-        <nav className="h-screen hidden flex-col justify-between items-center border py-8 px-4 sm:flex sm:flex-wrap">
+        <nav className="h-screen hidden flex-col justify-between items-center py-8 px-4 sm:flex sm:flex-wrap bg-muted border-r-4">
           <div className="py-3 flex items-center justify-center w-full cursor-pointer">
             <Link href="/dashboard">
               <Image
@@ -130,7 +128,7 @@ export function LayoutNav({ children }: { children: React.ReactNode }) {
           </TooltipProvider>
 
           <div className="flex flex-col gap-6 justify-center items-center">
-            <TooltipProvider>
+            {/* <TooltipProvider>
               <Tooltip>
                 <TooltipTrigger>
                   <Settings className="cursor-pointer" />
@@ -139,14 +137,14 @@ export function LayoutNav({ children }: { children: React.ReactNode }) {
                   <p>Settings</p>
                 </TooltipContent>
               </Tooltip>
-            </TooltipProvider>
+            </TooltipProvider> */}
 
             <Dialog>
               <DialogTrigger>
                 <TooltipProvider>
                   <Tooltip>
                     <TooltipTrigger>
-                      <Button className="rounded-xl">
+                      <Button className="rounded-xl" variant="outline">
                         <LogOutIcon className="cursor-pointer" />
                       </Button>
                     </TooltipTrigger>
