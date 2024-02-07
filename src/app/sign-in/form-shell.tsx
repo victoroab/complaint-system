@@ -20,10 +20,10 @@ export function FormShell({
 }) {
   usePreventDoubleSignIn()
   return (
-    <main className="flex min-h-screen items-center justify-center p-4">
-      <div className="border rounded-xl h-auto p-5">
+    <main className="flex min-h-screen items-center justify-center p-4 bg-muted">
+      <div className="border-2 rounded-xl h-auto p-5">
         <BackButton />
-        <Card className="rounded-xl mt-6">
+        <Card className="rounded-xl mt-6 shadow-md">
           <CardHeader>
             <CardTitle className="flex items-center gap-3">
               {user} <LockKeyhole />

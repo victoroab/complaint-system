@@ -21,10 +21,10 @@ import {
 import { ReturnGuardProvider } from './ReturnGuardProvider'
 export default function Home() {
   return (
-    <main className="flex min-h-screen items-center justify-center p-4">
-      <div className="border rounded-xl h-auto p-6">
+    <main className="flex min-h-screen items-center justify-center p-4 bg-muted">
+      <div className="border-2 rounded-xl h-auto p-6">
         <ReturnGuardProvider>
-          <Card className="rounded-xl">
+          <Card className="rounded-xl shadow-md">
             <CardHeader>
               <CardTitle className="flex items-center flex-wrap justify-start gap-3">
                 <span>Sign In</span>
