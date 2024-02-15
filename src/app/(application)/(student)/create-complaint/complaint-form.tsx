@@ -51,7 +51,7 @@ const formSchema = z.object({
 
 export function ComplaintForm() {
   return (
-    <Card className="rounded-xl w-3/4">
+    <Card className="rounded-3xl w-full md:w-3/4">
       <CardHeader>
         <CardTitle>Complaint Form</CardTitle>
         <CardDescription>Fill the appropriate data</CardDescription>

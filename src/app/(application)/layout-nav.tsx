@@ -51,7 +51,7 @@ export function LayoutNav({ children }: { children: React.ReactNode }) {
 
   return (
     <>
-      <header className="border-b-2 w-full items-center py-4 px-8 justify-between flex sm:hidden bg-muted">
+      <header className="shadow-xl w-full items-center py-4 px-8 justify-between flex sm:hidden bg-muted">
         <Link href="/dashboard" className="cursor-pointer">
           <Image
             src={logo}
@@ -104,7 +104,7 @@ export function LayoutNav({ children }: { children: React.ReactNode }) {
         </div>
       </header>
       <section className="min-h-screen flex w-full">
-        <nav className="h-screen hidden flex-col justify-between items-center py-8 px-4 sm:flex sm:flex-wrap bg-muted border-r-4">
+        <nav className="min-h-screen hidden flex-col justify-between items-center py-8 px-4 sm:flex sm:flex-wrap bg-muted border-r">
           <div className="py-3 flex items-center justify-center w-full cursor-pointer">
             <Link href="/dashboard">
               <Image

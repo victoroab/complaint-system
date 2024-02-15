@@ -16,8 +16,8 @@ import Link from 'next/link'
 
 export function StudentDashboardData() {
   return (
-    <div className="flex gap-3 items-start justify-start flex-wrap dark:text-secondary-foreground p-6">
-      <Card className="cursor-pointer w-1/3 rounded-xl hover:bg-secondary shadow-lg">
+    <div className="flex gap-3 items-start justify-start flex-wrap lg:flex-nowrap dark:text-secondary-foreground p-2 sm:p-6">
+      <Card className="cursor-pointer w-full lg:w-1/3 rounded-xl hover:bg-secondary shadow-lg dark:hover:bg-primary">
         <Link href={'/create-complaint'} className="">
           <CardHeader>
             <CardTitle className="flex flex-wrap items-center justify-between gap-4 text-base font-normal">
@@ -32,7 +32,7 @@ export function StudentDashboardData() {
           </CardFooter>
         </Link>
       </Card>
-      <Card className="cursor-pointer w-1/3 rounded-xl hover:bg-secondary shadow-lg">
+      <Card className="cursor-pointer w-full lg:w-1/3 rounded-xl hover:bg-secondary shadow-lg dark:hover:bg-primary">
         <Link href={'/complaints/pending'} className="">
           <CardHeader>
             <CardTitle className="flex flex-wrap items-center justify-between gap-4 text-base font-normal">
@@ -47,7 +47,7 @@ export function StudentDashboardData() {
           </CardFooter>
         </Link>
       </Card>
-      <Card className="cursor-pointer w-1/3 rounded-xl hover:bg-secondary shadow-lg">
+      <Card className="cursor-pointer w-full lg:w-1/3 rounded-xl hover:bg-secondary shadow-lg dark:hover:bg-primary">
         <Link href={'/complaints/resolved'} className="">
           <CardHeader>
             <CardTitle className="flex flex-wrap items-center justify-between gap-4 text-base font-normal">
@@ -68,8 +68,8 @@ export function StudentDashboardData() {
 
 export function StaffDashboardData() {
   return (
-    <div className="flex gap-4 items-start flex-wrap dark:text-secondary-foreground">
-      <Card className="cursor-pointer w-96 rounded-xl hover:bg-primary-foreground">
+    <div className="flex gap-4 items-start justify-start flex-wrap md:flex-nowrap dark:text-secondary-foreground p-2 sm:p-6">
+      <Card className="cursor-pointer w-full lg:w-1/2 rounded-xl hover:bg-secondary shadow-lg dark:hover:bg-primary">
         <Link href={'/complaints/pending'} className="">
           <CardHeader>
             <CardTitle className="flex flex-wrap items-center justify-between gap-4 text-base font-normal">
@@ -84,7 +84,7 @@ export function StaffDashboardData() {
           </CardFooter>
         </Link>
       </Card>
-      <Card className="cursor-pointer w-96 rounded-xl hover:bg-primary-foreground">
+      <Card className="cursor-pointer w-full lg:w-1/2 rounded-xl hover:bg-secondary shadow-lg dark:hover:bg-primary">
         <Link href={'/complaints/resolved'} className="">
           <CardHeader>
             <CardTitle className="flex flex-wrap items-center justify-between gap-4 text-base font-normal">
@@ -105,8 +105,8 @@ export function StaffDashboardData() {
 
 export function PersonnelDashboardData() {
   return (
-    <div className="flex gap-4 items-start flex-wrap dark:text-secondary-foreground">
-      <Card className="cursor-pointer w-96 rounded-xl hover:bg-primary-foreground">
+    <div className="flex gap-4 items-start justify-start flex-wrap dark:text-secondary-foreground p-2 sm:p-6">
+      <Card className="cursor-pointer w-full lg:w-1/3 rounded-xl hover:bg-secondary shadow-lg dark:hover:bg-primary">
         <Link href={'/complaints/pending'} className="">
           <CardHeader>
             <CardTitle className="flex flex-wrap items-center justify-between gap-4 text-base font-normal">
@@ -121,7 +121,7 @@ export function PersonnelDashboardData() {
           </CardFooter>
         </Link>
       </Card>
-      <Card className="cursor-pointer w-96 rounded-xl hover:bg-primary-foreground">
+      <Card className="cursor-pointer w-full lg:w-1/3 rounded-xl hover:bg-secondary shadow-lg dark:hover:bg-primary">
         <Link href={'/complaints/in-progress'} className="">
           <CardHeader>
             <CardTitle className="flex flex-wrap items-center justify-between gap-4 text-base font-normal">
@@ -136,7 +136,7 @@ export function PersonnelDashboardData() {
           </CardFooter>
         </Link>
       </Card>
-      <Card className="cursor-pointer w-96 rounded-xl hover:bg-primary-foreground">
+      <Card className="cursor-pointer w-full lg:w-1/3 rounded-xl hover:bg-secondary shadow-lg dark:hover:bg-primary">
         <Link href={'/complaints/resolved'} className="">
           <CardHeader>
             <CardTitle className="flex flex-wrap items-center justify-between gap-4 text-base font-normal">
