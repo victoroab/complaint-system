@@ -17,7 +17,7 @@ export default function Page() {
   const session: Session = useContext(AuthContext)
 
   return (
-    <section className="w-full min-h-full pb-0 lg:py-12 p-6 sm:px-24">
+    <section className="w-full min-h-full pb-0 lg:py-12 p-6 sm:px-24 dark:bg-primary-foreground">
       <div className="w-full h-full flex flex-col">
         <div className="mb-5 pb-2 text-primary font-bold text-2xl border-b-4 flex"></div>
 
@@ -35,7 +35,7 @@ export default function Page() {
           </CardHeader>
           <CardContent className="h-auto p-4 flex flex-col gap-16 justify-between">
             <div className="w-full flex items-center justify-between border-b-4 pb-6">
-              <Card className="w-1/3 hover:bg-secondary cursor-pointer rounded-2xl dark:hover:bg-muted-foreground">
+              <Card className="w-1/3 hover:bg-secondary cursor-pointer rounded-2xl dark:hover:bg-primary-foreground">
                 <CardHeader>
                   <CardTitle className="flex items-center justify-between font-normal text-md">
                     <div className="flex items-center justify-center gap-3">
@@ -46,7 +46,7 @@ export default function Page() {
                   </CardTitle>
                 </CardHeader>
               </Card>
-              <Card className="w-1/3 hover:bg-secondary cursor-pointer rounded-2xl dark:hover:bg-muted-foreground">
+              <Card className="w-1/3 hover:bg-secondary cursor-pointer rounded-2xl dark:hover:bg-primary-foreground">
                 <CardHeader>
                   <CardTitle className="flex items-center justify-between font-normal text-md">
                     <div className="flex items-center justify-center gap-3">

@@ -35,6 +35,7 @@ import { Button } from '@/components/ui/button'
 
 export function LayoutNav({ children }: { children: React.ReactNode }) {
   // use .env to determine the behaviour of the useAuth() hook
+  // add suspense components
   useAuth()
   const router = useRouter()
 

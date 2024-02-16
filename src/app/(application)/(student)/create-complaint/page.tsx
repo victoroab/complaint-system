@@ -3,8 +3,8 @@ import { ComplaintForm } from './complaint-form'
 
 export default function Page() {
   return (
-    <section className="w-full min-h-full p-8">
-      <div className="w-full h-full flex flex-col bg-muted py-4 px-8">
+    <section className="w-full min-h-full p-8 dark:bg-primary-foreground">
+      <div className="w-full h-full flex flex-col bg-muted py-4 px-8 rounded-xl">
         <div className="mb-5 pb-2 text-muted-foreground text-xl border-b-4 flex justify-between">
           Create a Complaint
           <BackButton />
