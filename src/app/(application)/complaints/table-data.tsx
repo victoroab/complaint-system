@@ -32,7 +32,7 @@ import {
 } from './resolved/functions'
 import { fix, getInProgress } from './in-progress/functions'
 import { toast } from 'sonner'
-import { useGetEmail, useGetUserType } from '@/auth/useAuth'
+import { useGetEmail, useGetUserType } from '@/auth/hooks'
 import { SkeletonTable } from './skeleton-table'
 
 export type User = 'STUDENT' | 'PERSONNEL' | 'STAFF'

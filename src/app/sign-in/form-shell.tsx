@@ -9,7 +9,7 @@ import {
 } from '@/components/ui/card'
 import { LockKeyhole } from 'lucide-react'
 import { BackButton } from './buttons'
-import { usePreventDoubleSignIn } from '@/auth/useAuth'
+import { usePreventDoubleSignIn } from '@/auth/hooks'
 
 export function FormShell({
   user,

@@ -29,26 +29,16 @@ import {
 import { Label } from '@/components/ui/label'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
-import { supabase } from '@/lib/auth'
-import { useAuth } from '@/auth/useAuth'
+import { useAuth, signOut } from '@/auth/hooks'
 import { Button } from '@/components/ui/button'
+import { Suspense } from 'react'
+import Loading from './loading'
 
 export function LayoutNav({ children }: { children: React.ReactNode }) {
   // use .env to determine the behaviour of the useAuth() hook
   // add suspense components
   useAuth()
   const router = useRouter()
-
-  async function signOut() {
-    await supabase.auth.signOut()
-
-    if (typeof window !== 'undefined' && window.localStorage) {
-      localStorage.removeItem('session_key')
-      localStorage.removeItem('user_type')
-    }
-
-    router.refresh()
-  }
 
   return (
     <>
@@ -129,17 +119,6 @@ export function LayoutNav({ children }: { children: React.ReactNode }) {
           </TooltipProvider>
 
           <div className="flex flex-col gap-6 justify-center items-center">
-            {/* <TooltipProvider>
-              <Tooltip>
-                <TooltipTrigger>
-                  <Settings className="cursor-pointer" />
-                </TooltipTrigger>
-                <TooltipContent>
-                  <p>Settings</p>
-                </TooltipContent>
-              </Tooltip>
-            </TooltipProvider> */}
-
             <Dialog>
               <DialogTrigger>
                 <TooltipProvider>
@@ -170,7 +149,7 @@ export function LayoutNav({ children }: { children: React.ReactNode }) {
                   </DialogClose>
                   <Button
                     className="w-full rounded-xl"
-                    onClick={() => signOut()}
+                    onClick={() => signOut(router)}
                   >
                     Yes
                   </Button>
@@ -179,7 +158,7 @@ export function LayoutNav({ children }: { children: React.ReactNode }) {
             </Dialog>
           </div>
         </nav>
-        {children}
+        <Suspense fallback={<Loading />}>{children}</Suspense>
       </section>
     </>
   )

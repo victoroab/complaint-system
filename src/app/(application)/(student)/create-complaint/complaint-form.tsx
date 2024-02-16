@@ -21,7 +21,7 @@ import { Textarea } from '@/components/ui/textarea'
 import { createComplaint, getStudentHall } from '../functions'
 import { useMutation, useQuery } from '@tanstack/react-query'
 import { toast } from 'sonner'
-import { useGetEmail } from '@/auth/useAuth'
+import { useGetEmail } from '@/auth/hooks'
 
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'

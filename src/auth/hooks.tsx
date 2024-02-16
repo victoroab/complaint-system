@@ -5,6 +5,8 @@ import { useContext } from 'react'
 import { AuthContext } from '@/auth/AuthProvider'
 import type { Session } from '@/auth/types'
 import { usePathname } from 'next/navigation'
+import { supabase } from '@/lib/auth'
+import type { AppRouterInstance } from 'next/dist/shared/lib/app-router-context.shared-runtime'
 
 export function useAuth() {
   const session: Session = useContext(AuthContext)
@@ -32,4 +34,15 @@ export function useGetEmail() {
 export function useGetUserType() {
   const session: Session = useContext(AuthContext)
   return session?.userType?.toUpperCase() as 'STUDENT' | 'STAFF' | 'PERSONNEL'
+}
+
+export async function signOut(router: AppRouterInstance) {
+  await supabase.auth.signOut()
+
+  if (typeof window !== 'undefined' && window.localStorage) {
+    localStorage.removeItem('session_key')
+    localStorage.removeItem('user_type')
+  }
+
+  router.refresh()
 }

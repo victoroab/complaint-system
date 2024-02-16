@@ -1,5 +1,5 @@
 'use client'
-import { usePreventDoubleSignIn } from '@/auth/useAuth'
+import { usePreventDoubleSignIn } from '@/auth/hooks'
 
 export function ReturnGuardProvider({
   children,

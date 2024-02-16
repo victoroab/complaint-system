@@ -1,6 +1,6 @@
 'use client'
 
-import { useGetUserType } from '@/auth/useAuth'
+import { useGetUserType } from '@/auth/hooks'
 import { PendingTableData } from '../table-data'
 import { BackButton } from '../../back-button'
 

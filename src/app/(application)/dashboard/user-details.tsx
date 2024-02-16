@@ -1,5 +1,5 @@
 'use client'
-import { useGetEmail, useGetUserType } from '@/auth/useAuth'
+import { useGetEmail, useGetUserType } from '@/auth/hooks'
 import { useQuery } from '@tanstack/react-query'
 import { getUserData } from './functions'
 import { Skeleton } from '@/components/ui/skeleton'
@@ -17,7 +17,7 @@ export function UserDetails() {
   })
 
   return (
-    <span className="text-secondary-foreground ml-6 text-md">
+    <span className="text-secondary-foreground ml-6 text-sm sm:text-md">
       {userData.isLoading ? (
         <Skeleton className="w-56 h-4 rounded-sm" />
       ) : (
