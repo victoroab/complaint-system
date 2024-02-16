@@ -1,13 +1,6 @@
 'use client'
 
 import { Button } from '@/components/ui/button'
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
 import {
   Select,
@@ -18,14 +11,6 @@ import {
   SelectValue,
 } from '@/components/ui/select'
 import { Textarea } from '@/components/ui/textarea'
-import { createComplaint, getStudentHall } from '../functions'
-import { useMutation, useQuery } from '@tanstack/react-query'
-import { toast } from 'sonner'
-import { useGetEmail } from '@/auth/hooks'
-
-import { zodResolver } from '@hookform/resolvers/zod'
-import { useForm } from 'react-hook-form'
-import { z } from 'zod'
 import {
   Form,
   FormControl,
@@ -35,6 +20,16 @@ import {
   FormMessage,
 } from '@/components/ui/form'
 import { ReloadIcon } from '@radix-ui/react-icons'
+import { toast } from 'sonner'
+
+import { z } from 'zod'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { useForm } from 'react-hook-form'
+
+import { createComplaint, getStudentHall } from '../functions'
+import { useMutation, useQuery } from '@tanstack/react-query'
+
+import { useGetEmail } from '@/auth/hooks'
 import { useRouter } from 'next/navigation'
 
 const formSchema = z.object({
@@ -48,20 +43,6 @@ const formSchema = z.object({
     message: 'minimum of 4 characters',
   }),
 })
-
-export function ComplaintForm() {
-  return (
-    <Card className="rounded-3xl w-full md:w-3/4">
-      <CardHeader>
-        <CardTitle>Complaint Form</CardTitle>
-        <CardDescription>Fill the appropriate data</CardDescription>
-      </CardHeader>
-      <CardContent className="w-full">
-        <FormFields />
-      </CardContent>
-    </Card>
-  )
-}
 
 export function FormFields() {
   const email = useGetEmail()

@@ -20,7 +20,7 @@ export function BackButton() {
 
 export function StudentSignInButton() {
   return (
-    <Link href="/sign-in/student" prefetch={false}>
+    <Link href="/sign-in/student">
       <NavigationMenuLink className={navigationMenuTriggerStyle()}>
         Student
       </NavigationMenuLink>
@@ -30,7 +30,7 @@ export function StudentSignInButton() {
 
 export function StaffSignInButton() {
   return (
-    <Link href="/sign-in/staff" prefetch={false}>
+    <Link href="/sign-in/staff">
       <NavigationMenuLink className={navigationMenuTriggerStyle()}>
         Staff
       </NavigationMenuLink>
@@ -40,7 +40,7 @@ export function StaffSignInButton() {
 
 export function PersonnelSignInButton() {
   return (
-    <Link href="/sign-in/personnel" prefetch={false}>
+    <Link href="/sign-in/personnel">
       <NavigationMenuLink className={navigationMenuTriggerStyle()}>
         Personnel
       </NavigationMenuLink>

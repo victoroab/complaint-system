@@ -1,5 +1,12 @@
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from '@/components/ui/card'
 import { BackButton } from '../../back-button'
-import { ComplaintForm } from './complaint-form'
+import { FormFields } from './complaint-form'
 
 export default function Page() {
   return (
@@ -11,8 +18,15 @@ export default function Page() {
         </div>
 
         <div className="flex items-center justify-center w-full bg-muted">
-          <ComplaintForm />
-          {/* <ComplaintFormTwo /> */}
+          <Card className="rounded-3xl w-full md:w-3/4">
+            <CardHeader>
+              <CardTitle>Complaint Form</CardTitle>
+              <CardDescription>Fill the appropriate data</CardDescription>
+            </CardHeader>
+            <CardContent className="w-full">
+              <FormFields />
+            </CardContent>
+          </Card>
         </div>
       </div>
     </section>

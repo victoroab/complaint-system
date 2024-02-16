@@ -46,3 +46,30 @@ export async function signOut(router: AppRouterInstance) {
 
   router.refresh()
 }
+
+export async function signIn({
+  router,
+  email,
+  password,
+  userType,
+}: {
+  router: AppRouterInstance
+  email: string
+  password: string
+  userType: string
+}) {
+  const { data, error } = await supabase.auth.signInWithPassword({
+    email,
+    password,
+  })
+
+  if (error) {
+    throw new Error('Unable to sign in, try again')
+  }
+
+  if (data.session && typeof window !== 'undefined' && window.localStorage) {
+    localStorage.setItem('user_type', JSON.stringify(userType))
+  }
+
+  router.replace('/dashboard')
+}
