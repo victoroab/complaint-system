@@ -23,6 +23,7 @@ import {
   handleComplaint,
   inspectComplaint,
   getPersonnelCategory,
+  notifyStaff,
 } from './pending/functions'
 import {
   getStaffResolved,
@@ -160,6 +161,13 @@ export function PendingTableData({ user }: { user: User }) {
     },
   })
 
+  const notifyMutation = useMutation({
+    mutationFn: notifyStaff,
+    onSuccess: () => {
+      toast('Success')
+    },
+  })
+
   function inspect(id: string) {
     return inspectMutation.mutate({
       id,
@@ -185,7 +193,7 @@ export function PendingTableData({ user }: { user: User }) {
                 <TableHead className="h-auto">S/N</TableHead>
                 <TableHead className="h-auto">Category</TableHead>
                 <TableHead className="h-auto">Issue</TableHead>
-                {/* <TableHead className="h-auto">Room</TableHead> */}
+                <TableHead className="h-auto">Room</TableHead>
                 <TableHead className="h-auto">Personnel</TableHead>
                 <TableHead className="h-auto">Fixed</TableHead>
                 <TableHead className="h-auto">Inspected</TableHead>
@@ -199,10 +207,10 @@ export function PendingTableData({ user }: { user: User }) {
                   <TableCell className="h-auto">{idx + 1}</TableCell>
                   <TableCell className="h-auto">{item.category}</TableCell>
                   <TableCell className="h-auto">{item.issue}</TableCell>
-                  {/* <TableCell className="h-auto">D107</TableCell> */}
+                  <TableCell className="h-auto">{item.roomNumber}</TableCell>
                   <TableCell className="h-auto">{`${
-                    item?.handler?.firstname ?? ''
-                  } ${item?.handler?.lastname ?? ''}`}</TableCell>
+                    item?.handler?.firstname ?? 'not'
+                  } ${item?.handler?.lastname ?? 'assigned'}`}</TableCell>
                   <TableCell className="h-auto">
                     {item.fixed ? 'yes' : 'no'}
                   </TableCell>
@@ -218,6 +226,12 @@ export function PendingTableData({ user }: { user: User }) {
                             className="rounded-xl"
                             size="sm"
                             disabled={item.fixed === false}
+                            onClick={() =>
+                              notifyMutation.mutate({
+                                hall: item.hall,
+                                roomNumber: item.roomNumber,
+                              })
+                            }
                           >
                             Notify Hall Officer
                           </Button>

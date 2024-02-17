@@ -51,6 +51,7 @@ model Complaints {
   student     Student    @relation(fields: [matricNo], references: [matricNo])
   matricNo    String
   category    Category
+  roomNumber  String?
   issue       String
   fixed       Boolean    @default(false)
   inspected   Boolean    @default(false)

@@ -3,13 +3,13 @@ import { EmailNotification } from '@/lib/mail-service'
 
 export async function POST(request: NextRequest) {
   try {
-    const { email } = await request.json()
+    const { email, hall } = await request.json()
     new EmailNotification({
       to: email,
-      body: 'With a bit of design',
-      subject: 'Hi',
+      subject: 'Unhandled Coplaints',
+      body: `Your services are needed at ${hall} hall!`,
     }).send()
-    return Response.json('sent')
+    return Response.json('notification sent')
   } catch (e) {
     console.error(e)
 
@@ -21,5 +21,3 @@ export async function POST(request: NextRequest) {
     })
   }
 }
-
-// sendMail('Test', email, 'Without waiting for it to finish')

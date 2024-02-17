@@ -15,9 +15,11 @@ export async function GET(request: NextRequest) {
           select: {
             category: true,
             createdAt: true,
+            roomNumber: true,
             issue: true,
             inspected: true,
             id: true,
+            hall: true,
             fixed: true,
             handler: {
               select: {

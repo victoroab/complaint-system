@@ -75,6 +75,7 @@ export function FormFields() {
       category: values.category,
       email,
       issue: values.issue,
+      roomNumber: values.room,
     })
   }
 

@@ -24,7 +24,7 @@ export function UserDetails() {
         `${userData?.data?.firstname} ${userData?.data?.lastname} ${
           userData?.data?.hall ? '- ' + userData?.data?.hall.toLowerCase() : ''
         } ${userType !== 'personnel' ? 'hall' : ''} ${
-          userType === 'personnel' ? userData?.data?.category : ''
+          userType === 'personnel' ? `- ${userData?.data?.category}` : ''
         } `
       )}
     </span>

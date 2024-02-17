@@ -89,6 +89,29 @@ const inspectComplaint = async ({ id }: { id: string }) => {
   }
 }
 
+const notifyStaff = async ({
+  hall,
+  roomNumber,
+}: {
+  hall: string
+  roomNumber: string
+}) => {
+  try {
+    await Axios.post(
+      '/notification/notify-staff',
+      {
+        hall,
+        roomNumber,
+      },
+      {
+        withCredentials: true,
+      }
+    )
+  } catch (e) {
+    console.error(e)
+  }
+}
+
 export {
   getStudentPending,
   getStaffPending,
@@ -96,4 +119,5 @@ export {
   getPersonnelPending,
   handleComplaint,
   inspectComplaint,
+  notifyStaff,
 }

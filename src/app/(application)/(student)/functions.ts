@@ -5,11 +5,13 @@ const createComplaint = async ({
   category,
   issue,
   email,
+  roomNumber,
 }: {
   hall: string
   category: string
   issue: string
   email: string
+  roomNumber: string
 }) => {
   try {
     return await (
@@ -19,6 +21,7 @@ const createComplaint = async ({
           hall,
           category,
           issue,
+          roomNumber,
           email,
         },
         { withCredentials: true }
