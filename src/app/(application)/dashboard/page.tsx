@@ -12,6 +12,14 @@ import type { Session } from '@/auth/types'
 import { UserDetails } from './user-details'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { GearIcon, PersonIcon } from '@radix-ui/react-icons'
+import {
+  Drawer,
+  DrawerContent,
+  DrawerHeader,
+  DrawerTrigger,
+} from '@/components/ui/drawer'
+import { Label } from '@/components/ui/label'
+import { LockKeyhole, LogOutIcon } from 'lucide-react'
 
 export default function Page() {
   const session: Session = useContext(AuthContext)
@@ -46,17 +54,34 @@ export default function Page() {
                   </CardTitle>
                 </CardHeader>
               </Card>
-              <Card className="hidden sm:block w-1/3 hover:bg-secondary cursor-pointer rounded-2xl dark:hover:bg-primary-foreground">
-                <CardHeader>
-                  <CardTitle className="flex items-center justify-between font-normal text-md">
-                    <div className="flex items-center justify-center gap-3">
-                      <GearIcon className="w-8 h-8" />
-                      <span className="hidden md:block">Settings</span>
-                    </div>
-                    <div className="hidden lg:block w-2 h-2 bg-green-600 rounded-full mr-2"></div>
-                  </CardTitle>
-                </CardHeader>
-              </Card>
+              <Drawer>
+                <DrawerTrigger asChild>
+                  <Card className="hidden sm:block w-1/3 hover:bg-secondary cursor-pointer rounded-2xl dark:hover:bg-primary-foreground">
+                    <CardHeader>
+                      <CardTitle className="flex items-center justify-between font-normal text-md">
+                        <div className="flex items-center justify-center gap-3">
+                          <GearIcon className="w-8 h-8" />
+                          <span className="hidden md:block">Settings</span>
+                        </div>
+                        <div className="hidden lg:block w-2 h-2 bg-green-600 rounded-full mr-2"></div>
+                      </CardTitle>
+                    </CardHeader>
+                  </Card>
+                </DrawerTrigger>
+                <DrawerContent>
+                  <DrawerHeader>Settings</DrawerHeader>
+                  <div className="h-96 p-12 flex gap-12 items-start">
+                    <span className="flex gap-4 items-center justify-center cursor-pointer">
+                      <LockKeyhole />
+                      <Label>Change Password</Label>
+                    </span>
+                    <span className="flex gap-4 items-center justify-center cursor-pointer">
+                      <LogOutIcon />
+                      <Label>Sign Out</Label>
+                    </span>
+                  </div>
+                </DrawerContent>
+              </Drawer>
             </div>
 
             {session.userType === 'student' ? (

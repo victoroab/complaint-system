@@ -35,7 +35,6 @@ import { Suspense } from 'react'
 import Loading from './loading'
 
 export function LayoutNav({ children }: { children: React.ReactNode }) {
-  // use .env to determine the behaviour of the useAuth() hook
   useAuth()
   const router = useRouter()
 

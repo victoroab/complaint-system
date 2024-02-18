@@ -202,6 +202,9 @@ export function PendingTableData({ user }: { user: User }) {
               </TableRow>
             </TableHeader>
             <TableBody>
+              {studentPending?.data?.length === 0 && (
+                <TableRow>No Pending</TableRow>
+              )}
               {studentPending?.data?.map((item: any, idx: any) => (
                 <TableRow className="h-auto" key={item.id}>
                   <TableCell className="h-auto">{idx + 1}</TableCell>
@@ -266,7 +269,7 @@ export function PendingTableData({ user }: { user: User }) {
                 <TableHead>S/N</TableHead>
                 <TableHead>Category</TableHead>
                 <TableHead>Issue</TableHead>
-                {/* <TableHead>Room</TableHead> */}
+                <TableHead>Room</TableHead>
                 <TableHead>Student Name</TableHead>
                 <TableHead>Matric No</TableHead>
                 <TableHead>Personnel</TableHead>
@@ -276,12 +279,15 @@ export function PendingTableData({ user }: { user: User }) {
               </TableRow>
             </TableHeader>
             <TableBody>
+              {staffPending?.data?.length === 0 && (
+                <TableRow>No Pending</TableRow>
+              )}
               {staffPending?.data?.map((item: any, idx: any) => (
                 <TableRow key={item.id}>
                   <TableCell>{idx + 1}</TableCell>
                   <TableCell>{item.category}</TableCell>
                   <TableCell>{item.issue}</TableCell>
-                  {/* <TableCell>D107</TableCell> */}
+                  <TableCell>{item.roomNumber}</TableCell>
                   <TableCell>{`${item?.student?.firstname ?? ''} ${
                     item?.student?.lastname ?? ''
                   }`}</TableCell>
@@ -330,6 +336,9 @@ export function PendingTableData({ user }: { user: User }) {
               </TableRow>
             </TableHeader>
             <TableBody>
+              {personnelPending?.data?.length === 0 && (
+                <TableRow>No Pending</TableRow>
+              )}
               {personnelPending?.data?.map((item: any, idx: any) => (
                 <TableRow key={idx}>
                   <TableCell>{idx + 1}</TableCell>
@@ -408,6 +417,9 @@ export function ResolvedTableData({ user }: { user: User }) {
             </TableHeader>
             <TableBody>
               {/* {userType === 'STUDENT' ??}  */}
+              {studentResolved?.data?.length === 0 && (
+                <TableRow>No Pending</TableRow>
+              )}
               {studentResolved?.data?.map((item: any, idx: any) => (
                 <TableRow key={item.id}>
                   <TableCell>{idx + 1}</TableCell>
@@ -446,6 +458,9 @@ export function ResolvedTableData({ user }: { user: User }) {
               </TableRow>
             </TableHeader>
             <TableBody>
+            {staffResolved?.data?.length === 0 && (
+                <TableRow>No Pending</TableRow>
+              )}
               {staffResolved?.data?.map((item: any, idx: any) => (
                 <TableRow key={item.id}>
                   <TableCell>{idx + 1}</TableCell>
@@ -487,6 +502,9 @@ export function ResolvedTableData({ user }: { user: User }) {
               </TableRow>
             </TableHeader>
             <TableBody>
+            {personnelResolved?.data?.length === 0 && (
+                <TableRow>No Pending</TableRow>
+              )}
               {personnelResolved?.data?.map((item: any, idx: any) => (
                 <TableRow key={item.id}>
                   <TableCell>{idx + 1}</TableCell>
