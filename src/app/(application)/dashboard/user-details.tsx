@@ -14,10 +14,11 @@ export function UserDetails() {
   const userData = useQuery({
     queryKey: ['userData'],
     queryFn: () => getUserData({ email, userType }),
+    staleTime: Infinity,
   })
 
   return (
-    <span className="text-secondary-foreground ml-6 text-sm sm:text-md">
+    <span className="text-secondary-foreground ml-6 text-sm sm:text-md md:text-xl">
       {userData.isLoading ? (
         <Skeleton className="w-56 h-4 rounded-sm" />
       ) : (

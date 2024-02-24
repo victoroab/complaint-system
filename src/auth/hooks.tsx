@@ -64,7 +64,7 @@ export async function signIn({
   })
 
   if (error) {
-    throw new Error('Unable to sign in, try again')
+    throw new Error(error.message)
   }
 
   if (data.session && typeof window !== 'undefined' && window.localStorage) {

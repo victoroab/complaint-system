@@ -17,6 +17,8 @@ import { useForm } from 'react-hook-form'
 import { signIn } from '@/auth/hooks'
 import { useMutation } from '@tanstack/react-query'
 import { ReloadIcon } from '@radix-ui/react-icons'
+import { ShieldBan } from 'lucide-react'
+import { toast } from 'sonner'
 
 export function LoginForm({ userType }: { userType: string }) {
   const router = useRouter()
@@ -44,6 +46,14 @@ export function LoginForm({ userType }: { userType: string }) {
       email,
       password,
       userType,
+    })
+  }
+
+  if (signInMutation.isError) {
+    toast('Error', {
+      icon: <ShieldBan color="#ff2727" />,
+      description: signInMutation.error.message,
+      cancel: { label: 'close', onClick: () => {} },
     })
   }
 

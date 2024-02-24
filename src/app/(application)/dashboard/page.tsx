@@ -25,14 +25,14 @@ export default function Page() {
   const session: Session = useContext(AuthContext)
 
   return (
-    <section className="w-full min-h-full pb-0 lg:py-12 p-6 sm:px-24 dark:bg-primary-foreground">
+    <section className="w-full min-h-full pb-0 lg:py-12 p-6 xl:px-24 dark:bg-primary-foreground">
       <div className="w-full h-full flex flex-col">
         <div className="mb-5 pb-2 text-primary font-bold text-2xl border-b-4 flex"></div>
 
         <Card className="w-full rounded-2xl mb-8 bg-muted h-full">
           <CardHeader className="">
             <CardTitle className="flex items-center justify-between">
-              <div className="flex items-center justify-start">
+              <div className="flex flex-wrap items-center justify-start">
                 <div className="w-8 h-8 rounded-full bg-muted-foreground"></div>
                 <span className="text-primary text-md">
                   <UserDetails />
