@@ -20,6 +20,7 @@ import {
 } from '@/components/ui/drawer'
 import { Label } from '@/components/ui/label'
 import { LockKeyhole, LogOutIcon } from 'lucide-react'
+import Link from 'next/link'
 
 export default function Page() {
   const session: Session = useContext(AuthContext)
@@ -33,10 +34,7 @@ export default function Page() {
           <CardHeader className="">
             <CardTitle className="flex items-center justify-between">
               <div className="flex flex-wrap items-center justify-start">
-                <div className="w-8 h-8 rounded-full bg-muted-foreground"></div>
-                <span className="text-primary text-md">
-                  <UserDetails />
-                </span>
+                <UserDetails />
               </div>
               <div className="font-normal cursor-pointer text-lg flex items-center gap-3 justify-center hover:text-muted-foreground"></div>
             </CardTitle>
@@ -44,15 +42,17 @@ export default function Page() {
           <CardContent className="h-auto p-4 flex flex-col gap-16 justify-between">
             <div className="w-full flex items-center justify-between border-b-4 pb-6">
               <Card className="w-full sm:w-1/3 hover:bg-secondary cursor-pointer rounded-2xl dark:hover:bg-primary-foreground">
-                <CardHeader>
-                  <CardTitle className="flex items-center justify-between font-normal text-md">
-                    <div className="flex items-center justify-center gap-3">
-                      <PersonIcon className="w-8 h-8" />
-                      <span className="block">Profile</span>
-                    </div>
-                    <div className="hidden lg:block w-2 h-2 bg-blue-400 rounded-full mr-2"></div>
-                  </CardTitle>
-                </CardHeader>
+                <Link href={'/profile'}>
+                  <CardHeader>
+                    <CardTitle className="flex items-center justify-between font-normal text-md">
+                      <div className="flex items-center justify-center gap-3">
+                        <PersonIcon className="w-8 h-8" />
+                        <span className="block">Profile</span>
+                      </div>
+                      <div className="hidden lg:block w-2 h-2 bg-blue-400 rounded-full mr-2"></div>
+                    </CardTitle>
+                  </CardHeader>
+                </Link>
               </Card>
               <Drawer>
                 <DrawerTrigger asChild>

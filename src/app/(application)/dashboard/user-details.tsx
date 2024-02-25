@@ -14,19 +14,28 @@ export function UserDetails() {
   const userData = useQuery({
     queryKey: ['userData'],
     queryFn: () => getUserData({ email, userType }),
-    staleTime: Infinity,
+    // staleTime: Infinity,
   })
 
   return (
     <span className="text-secondary-foreground ml-6 text-sm sm:text-md md:text-xl">
       {userData.isLoading ? (
-        <Skeleton className="w-56 h-4 rounded-sm" />
+        <div className="flex items-center justify-start gap-4">
+          <Skeleton className="size-12 rounded-full bg-muted-foreground dark:bg-primary-foreground" />
+          <Skeleton className="w-64 h-4 bg-muted-foreground dark:bg-primary-foreground rounded-xl" />
+        </div>
       ) : (
-        `${userData?.data?.firstname} ${userData?.data?.lastname} ${
-          userData?.data?.hall ? '- ' + userData?.data?.hall.toLowerCase() : ''
-        } ${userType !== 'personnel' ? 'hall' : ''} ${
-          userType === 'personnel' ? `- ${userData?.data?.category}` : ''
-        } `
+        <div className="flex items-center justify-start gap-4">
+          <div className="size-12 rounded-full bg-muted-foreground"></div>
+          <span className="text-md">
+            {userData?.data?.firstname} {userData?.data?.lastname}
+            {userData?.data?.hall
+              ? '- ' + userData?.data?.hall.toLowerCase()
+              : ''}{' '}
+            {userType !== 'personnel' ? 'hall' : ''}
+            {userType === 'personnel' ? `- ${userData?.data?.category}` : ''}
+          </span>
+        </div>
       )}
     </span>
   )

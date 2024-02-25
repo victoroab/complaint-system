@@ -28,7 +28,7 @@ export function LoginForm({ userType }: { userType: string }) {
       message: 'invalid Email',
     }),
     password: z.string({
-      required_error: 'Category is required',
+      required_error: 'Password is required',
     }),
   })
 
@@ -50,7 +50,7 @@ export function LoginForm({ userType }: { userType: string }) {
   }
 
   if (signInMutation.isError) {
-    toast('Error', {
+    toast(signInMutation.error.name, {
       icon: <ShieldBan color="#ff2727" />,
       description: signInMutation.error.message,
       cancel: { label: 'close', onClick: () => {} },
