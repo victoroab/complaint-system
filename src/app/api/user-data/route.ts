@@ -14,10 +14,12 @@ export async function GET(request: NextRequest) {
         data = await prisma.student.findFirst({
           where: { email },
           select: {
+            id: true,
             firstname: true,
             lastname: true,
             hall: true,
             roomNumber: true,
+            picture: { select: { url: true } },
           },
         })
         break
@@ -26,9 +28,11 @@ export async function GET(request: NextRequest) {
         data = await prisma.hallOfficer.findFirst({
           where: { email },
           select: {
+            id: true,
             firstname: true,
             lastname: true,
             hall: true,
+            picture: { select: { url: true } },
           },
         })
         break
@@ -37,9 +41,11 @@ export async function GET(request: NextRequest) {
         data = await prisma.personnel.findFirst({
           where: { email },
           select: {
+            id: true,
             firstname: true,
             lastname: true,
             category: true,
+            picture: { select: { url: true } },
           },
         })
         break

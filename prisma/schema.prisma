@@ -11,34 +11,38 @@ datasource db {
 }
 
 model Student {
-  id         String       @id @default(cuid())
-  firstname  String
-  lastname   String
-  email      String       @unique
-  matricNo   String       @unique
-  hall       Hall
-  roomNumber String
-  complaint  Complaints[]
+  id               String          @id @default(cuid())
+  firstname        String
+  lastname         String
+  email            String          @unique
+  matricNo         String          @unique
+  hall             Hall
+  picture          StudentProfile?
+  roomNumber       String
+  complaint        Complaints[]
+  studentProfileId String
 
   @@index([matricNo, email])
 }
 
 model HallOfficer {
-  id        String @id @default(cuid())
+  id        String              @id @default(cuid())
   firstname String
   lastname  String
-  email     String @unique
-  staffNo   String @unique
+  email     String              @unique
+  picture   HallOfficerProfile?
+  staffNo   String              @unique
   hall      Hall
 
   @@index([staffNo, email])
 }
 
 model Personnel {
-  id         String       @id @default(cuid())
+  id         String            @id @default(cuid())
   firstname  String
   lastname   String
-  email      String       @unique
+  email      String            @unique
+  picture    PersonnelProfile?
   category   Category
   complaints Complaints[]
 
@@ -61,6 +65,27 @@ model Complaints {
   createdAt   DateTime   @default(now())
 
   @@index([hall, category])
+}
+
+model StudentProfile {
+  id        String  @id @default(cuid())
+  student   Student @relation(fields: [studentId], references: [id])
+  studentId String  @unique
+  url       String?
+}
+
+model HallOfficerProfile {
+  id            String      @id @default(cuid())
+  hallOfficer   HallOfficer @relation(fields: [hallOfficerId], references: [id])
+  hallOfficerId String      @unique
+  url           String?
+}
+
+model PersonnelProfile {
+  id          String    @id @default(cuid())
+  personnel   Personnel @relation(fields: [personnelId], references: [id])
+  personnelId String    @unique
+  url         String?
 }
 
 enum Hall {
