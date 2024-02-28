@@ -60,8 +60,9 @@ export function ImageSection() {
       <div className="flex flex-col items-start gap-3">
         <Label
           htmlFor="file"
-          hidden={imageUrlQuery.isLoading}
-          className="cursor-pointer bg-primary p-3 rounded-xl hover:bg-primary-foreground"
+          className={`cursor-pointer ${
+            imageUrlQuery.isLoading ? 'hidden' : ''
+          } bg-primary p-3 rounded-xl hover:bg-primary-foreground text-white`}
         >
           Change Picture
         </Label>

@@ -458,7 +458,7 @@ export function ResolvedTableData({ user }: { user: User }) {
               </TableRow>
             </TableHeader>
             <TableBody>
-            {staffResolved?.data?.length === 0 && (
+              {staffResolved?.data?.length === 0 && (
                 <TableRow>No Pending</TableRow>
               )}
               {staffResolved?.data?.map((item: any, idx: any) => (
@@ -502,8 +502,8 @@ export function ResolvedTableData({ user }: { user: User }) {
               </TableRow>
             </TableHeader>
             <TableBody>
-            {personnelResolved?.data?.length === 0 && (
-                <TableRow>No Pending</TableRow>
+              {personnelResolved?.data?.length === 0 && (
+                <TableRow>No Resolved</TableRow>
               )}
               {personnelResolved?.data?.map((item: any, idx: any) => (
                 <TableRow key={item.id}>

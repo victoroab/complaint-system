@@ -22,7 +22,12 @@ export async function GET(request: NextRequest) {
             picture: { select: { url: true } },
           },
         })
-        break
+
+        // const resolvedCount = prisma.complaints.count({
+        //   where: {student: {email}, resolved: {equals: true}}
+        // })
+
+        return Response.json(data)
 
       case 'STAFF':
         data = await prisma.hallOfficer.findFirst({
@@ -35,7 +40,7 @@ export async function GET(request: NextRequest) {
             picture: { select: { url: true } },
           },
         })
-        break
+        return Response.json(data)
 
       case 'PERSONNEL':
         data = await prisma.personnel.findFirst({
@@ -48,7 +53,7 @@ export async function GET(request: NextRequest) {
             picture: { select: { url: true } },
           },
         })
-        break
+        return Response.json(data)
 
       default:
         throw new Error('Invalid user type')

@@ -18,8 +18,6 @@ export function DataSection() {
     queryFn: () => getUserData({ email, userType }),
   })
 
-  console.log(userData.data)
-
   return (
     <div className="flex flex-col gap-5">
       <div className="w-full sm:w-3/4 md:w-full  flex justify-start gap-7">
@@ -31,7 +29,7 @@ export function DataSection() {
             <Input
               className="bg-primary-foreground rounded-xl"
               disabled
-              value={userData.data.firstname}
+              value={userData.data?.firstname}
             />
           )}
         </div>
@@ -43,7 +41,7 @@ export function DataSection() {
             <Input
               className="bg-primary-foreground rounded-xl"
               disabled
-              value={userData.data.lastname}
+              value={userData.data?.lastname}
             />
           )}
         </div>
@@ -66,24 +64,27 @@ export function DataSection() {
             <Input
               className="bg-primary-foreground rounded-xl"
               disabled
-              value={userData.data.hall}
+              value={userData.data?.hall}
             />
           )}
         </div>
-        <div className="w-full h-full space-y-2">
-          <Label>Room</Label>
-          {userData.isLoading ? (
-            <Skeleton className="w-64 h-4 bg-muted-foreground dark:bg-primary-foreground rounded-xl" />
-          ) : (
-            <Input
-              className="bg-primary-foreground rounded-xl"
-              disabled
-              value={userData.data.room}
-            />
-          )}
-        </div>
+
+        {userType === 'student' ? (
+          <div className="w-full h-full space-y-2">
+            <Label>Room</Label>
+            {userData.isLoading ? (
+              <Skeleton className="w-64 h-4 bg-muted-foreground dark:bg-primary-foreground rounded-xl" />
+            ) : (
+              <Input
+                className="bg-primary-foreground rounded-xl"
+                disabled
+                value={userData.data?.room}
+              />
+            )}
+          </div>
+        ) : null}
       </div>
-      <div className="w-full flex justify-start gap-7">
+      {/* <div className="w-full flex justify-start gap-7">
         <div className="w-full h-full space-y-2">
           <Label>Complaints Created</Label>
           <Input
@@ -100,7 +101,7 @@ export function DataSection() {
             value={10}
           />
         </div>
-      </div>
+      </div> */}
     </div>
   )
 }
