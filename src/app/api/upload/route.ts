@@ -2,38 +2,38 @@ import { NextRequest } from 'next/server'
 import prisma from '@/lib/db'
 
 export async function PUT(request: NextRequest) {
-  const { id, url } = await request.json()
+  const { id, publicUrl } = await request.json()
   const searchParams = request.nextUrl.searchParams
   const usertype = searchParams.get('usertype')!.toUpperCase()
 
   try {
     switch (usertype) {
       case 'STUDENT':
-        await prisma.student.update({
-          where: { id },
-          data: {
-            picture: { create: { url } },
-          },
+        await prisma.studentProfile.upsert({
+          where: { studentId: id },
+          update: { url: publicUrl },
+          create: { studentId: id, url: publicUrl },
         })
-        break
+
+        return Response.json('updated')
 
       case 'STAFF':
-        await prisma.hallOfficer.update({
-          where: { id },
-          data: {
-            picture: { create: { url } },
-          },
+        await prisma.hallOfficerProfile.upsert({
+          where: { hallOfficerId: id },
+          update: { url: publicUrl },
+          create: { hallOfficerId: id, url: publicUrl },
         })
-        break
+
+        return Response.json('updated')
 
       case 'PERSONNEL':
-        await prisma.hallOfficer.update({
-          where: { id },
-          data: {
-            picture: { create: { url } },
-          },
+        await prisma.personnelProfile.upsert({
+          where: { personnelId: id },
+          update: { url: publicUrl },
+          create: { personnelId: id, url: publicUrl },
         })
-        break
+
+        return Response.json('updated')
 
       default:
         throw new Error('Invald user type')

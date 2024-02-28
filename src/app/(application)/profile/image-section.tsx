@@ -2,28 +2,65 @@
 
 import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar'
 import { Label } from '@/components/ui/label'
-import { uploadImage } from './functions'
+import {
+  uploadImage,
+  constructUrl,
+  updateImageUrl,
+  fetchImageUrl,
+  UploadParams,
+} from './functions'
+import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
+import { useGetEmail, useGetUserType } from '@/auth/hooks'
 
 export function ImageSection() {
+  const email = useGetEmail()
+  const usertype = useGetUserType()?.toLowerCase() as UploadParams['usertype']
+
+  const qc = useQueryClient()
+
+  const imageUrlQuery = useQuery({
+    queryKey: ['image'],
+    queryFn: () => fetchImageUrl({ email, usertype }),
+  })
+
+  const updateUrlMutation = useMutation({
+    mutationFn: updateImageUrl,
+    onSuccess: () => {
+      qc.invalidateQueries({ queryKey: ['image'] })
+    },
+  })
+
   async function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
-    if (e.target.files) {
-      const { data, error } = await uploadImage(e.target.files[0]!)
-      console.log(data)
-      if (error) {
-        console.error(error)
-      }
+    if (!e.target.files) {
+      throw new Error('No file Uploaded')
+    }
+    const { data, error } = await uploadImage(e.target.files[0]!)
+
+    if (!data) {
+      throw new Error('No data from request')
+    }
+
+    const publicUrl = constructUrl(data.path.slice(11))
+
+    if (imageUrlQuery.data.id) {
+      updateUrlMutation.mutate({
+        id: imageUrlQuery.data.id,
+        publicUrl,
+        usertype,
+      })
     }
   }
 
   return (
     <div className="w-full h-full flex flex-wrap items-center justify-start gap-6">
-      <Avatar className="size-52 border rounded-xl">
-        <AvatarImage src="https://github.com/shadcn.png" />
+      <Avatar className="size-52 border rounded-2xl">
+        <AvatarImage src={imageUrlQuery.data?.picture?.url} />
         <AvatarFallback>Image</AvatarFallback>
       </Avatar>
       <div className="flex flex-col items-start gap-3">
         <Label
           htmlFor="file"
+          hidden={imageUrlQuery.isLoading}
           className="cursor-pointer bg-primary p-3 rounded-xl hover:bg-primary-foreground"
         >
           Change Picture
@@ -33,6 +70,7 @@ export function ImageSection() {
           type="file"
           id="file"
           onChange={(e) => handleChange(e)}
+          disabled={imageUrlQuery.isLoading}
         />
         <span className="text-sm text-muted-foreground">
           JPG, JPEG or PNG, 2MB max.
