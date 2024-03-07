@@ -3,6 +3,7 @@ import { useGetEmail, useGetUserType } from '@/auth/hooks'
 import { useQuery } from '@tanstack/react-query'
 import { getUserData } from './functions'
 import { Skeleton } from '@/components/ui/skeleton'
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 
 export function UserDetails() {
   const email = useGetEmail()
@@ -14,7 +15,6 @@ export function UserDetails() {
   const userData = useQuery({
     queryKey: ['userData'],
     queryFn: () => getUserData({ email, userType }),
-    // staleTime: Infinity,
   })
 
   return (
@@ -26,7 +26,12 @@ export function UserDetails() {
         </div>
       ) : (
         <div className="flex items-center justify-start gap-4">
-          <div className="size-12 rounded-full bg-muted-foreground"></div>
+          <div className="size-12 rounded-full bg-muted-foreground">
+            <Avatar className="size-full border rounded-2xl">
+              <AvatarImage src={userData.data?.picture?.url} />
+              <AvatarFallback>Image</AvatarFallback>
+            </Avatar>
+          </div>
           <span className="text-md">
             {userData?.data?.firstname} {userData?.data?.lastname}
             {userData?.data?.hall
