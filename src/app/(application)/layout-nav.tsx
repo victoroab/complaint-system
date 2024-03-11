@@ -16,27 +16,17 @@ import {
   DrawerHeader,
   DrawerTrigger,
 } from '@/components/ui/drawer'
-import {
-  Dialog,
-  DialogClose,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from '@/components/ui/dialog'
-
+import { Dialog, DialogTrigger } from '@/components/ui/dialog'
 import { Label } from '@/components/ui/label'
 import Link from 'next/link'
-import { useRouter } from 'next/navigation'
-import { useAuth, signOut } from '@/auth/hooks'
+import { useAuth } from '@/auth/hooks'
 import { Button } from '@/components/ui/button'
 import { Suspense } from 'react'
 import Loading from './loading'
+import { SignOutDialog } from '@/components/signout-dialog'
 
 export function LayoutNav({ children }: { children: React.ReactNode }) {
   useAuth()
-  const router = useRouter()
 
   return (
     <>
@@ -77,10 +67,15 @@ export function LayoutNav({ children }: { children: React.ReactNode }) {
                         <LockKeyhole />
                         <Label>Change Password</Label>
                       </span>
-                      <span className="flex gap-4 items-center justify-center cursor-pointer">
-                        <LogOutIcon />
-                        <Label>Sign Out</Label>
-                      </span>
+                      <Dialog>
+                        <DialogTrigger>
+                          <span className="flex gap-3 items-center justify-center cursor-pointer">
+                            <LogOutIcon />
+                            <Label>Sign Out</Label>
+                          </span>
+                        </DialogTrigger>
+                        <SignOutDialog />
+                      </Dialog>
                     </div>
                   </DrawerContent>
                 </Drawer>
@@ -132,27 +127,7 @@ export function LayoutNav({ children }: { children: React.ReactNode }) {
                   </Tooltip>
                 </TooltipProvider>
               </DialogTrigger>
-              <DialogContent>
-                <DialogHeader>
-                  <DialogTitle>Sign Out?</DialogTitle>
-                  <DialogDescription>
-                    This will sign you out of the system.
-                  </DialogDescription>
-                </DialogHeader>
-                <div className="flex items-center justify-center gap-4">
-                  <DialogClose asChild>
-                    <Button className="w-full rounded-xl" variant="secondary">
-                      Go Back
-                    </Button>
-                  </DialogClose>
-                  <Button
-                    className="w-full rounded-xl"
-                    onClick={() => signOut(router)}
-                  >
-                    Yes
-                  </Button>
-                </div>
-              </DialogContent>
+              <SignOutDialog />
             </Dialog>
           </div>
         </nav>

@@ -1,14 +1,3 @@
-'use client'
-
-import { useContext } from 'react'
-import { AuthContext } from '@/auth/AuthProvider'
-
-import {
-  StudentDashboardData,
-  StaffDashboardData,
-  PersonnelDashboardData,
-} from './dashboard-data'
-import type { Session } from '@/auth/types'
 import { UserDetails } from './user-details'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { GearIcon, PersonIcon } from '@radix-ui/react-icons'
@@ -19,17 +8,17 @@ import {
   DrawerTrigger,
 } from '@/components/ui/drawer'
 import { Label } from '@/components/ui/label'
+import { Dialog, DialogTrigger } from '@/components/ui/dialog'
 import { LockKeyhole, LogOutIcon } from 'lucide-react'
 import Link from 'next/link'
+import { DashboardRender } from './dashboard-render'
+import { SignOutDialog } from '@/components/signout-dialog'
 
 export default function Page() {
-  const session: Session = useContext(AuthContext)
-
   return (
     <section className="w-full min-h-full pb-0 lg:py-12 p-6 xl:px-24 dark:bg-primary-foreground">
       <div className="w-full h-full flex flex-col">
         <div className="mb-5 pb-2 text-primary font-bold text-2xl border-b-4 flex"></div>
-
         <Card className="w-full rounded-2xl mb-8 bg-muted h-full">
           <CardHeader className="">
             <CardTitle className="flex items-center justify-between">
@@ -76,23 +65,19 @@ export default function Page() {
                       <Label>Change Password</Label>
                     </span>
                     <span className="flex gap-4 items-center justify-center cursor-pointer">
-                      <LogOutIcon />
-                      <Label>Sign Out</Label>
+                      <Dialog>
+                        <DialogTrigger className="flex items-center gap-3 justify-center">
+                          <LogOutIcon />
+                          <Label className="cursor-pointer">Sign Out</Label>
+                        </DialogTrigger>
+                        <SignOutDialog />
+                      </Dialog>
                     </span>
                   </div>
                 </DrawerContent>
               </Drawer>
             </div>
-
-            {session.userType === 'student' ? (
-              <StudentDashboardData />
-            ) : session.userType === 'staff' ? (
-              <StaffDashboardData />
-            ) : session.userType === 'personnel' ? (
-              <PersonnelDashboardData />
-            ) : (
-              ''
-            )}
+            <DashboardRender />
           </CardContent>
         </Card>
       </div>
