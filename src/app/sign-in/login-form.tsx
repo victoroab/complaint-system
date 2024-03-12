@@ -38,9 +38,12 @@ export function LoginForm({ userType }: { userType: string }) {
 
   const signInMutation = useMutation({
     mutationFn: signIn,
+    onSuccess() {
+      router.replace('/dashboard')
+    },
   })
 
-  async function onSubmit({ email, password }: z.infer<typeof formSchema>) {
+  function onSubmit({ email, password }: z.infer<typeof formSchema>) {
     signInMutation.mutate({
       router,
       email,

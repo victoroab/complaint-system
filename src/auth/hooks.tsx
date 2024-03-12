@@ -71,5 +71,6 @@ export async function signIn({
     localStorage.setItem('user_type', JSON.stringify(userType))
   }
   // router.replace('/dashboard')
-  router.refresh()
+  // router.refresh()
+  // redirect('/dashboard')
 }
