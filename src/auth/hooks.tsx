@@ -67,9 +67,9 @@ export async function signIn({
     throw new Error(error.message)
   }
 
-  router.replace('/dashboard')
-
   if (data.session && typeof window !== 'undefined' && window.localStorage) {
     localStorage.setItem('user_type', JSON.stringify(userType))
   }
+  // router.replace('/dashboard')
+  router.refresh()
 }
