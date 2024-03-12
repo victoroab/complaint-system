@@ -23,7 +23,7 @@ export default function Page() {
           <CardHeader className="">
             <CardTitle className="flex items-center justify-between">
               <div className="flex flex-wrap items-center justify-start">
-                {/* <UserDetails /> */}
+                <UserDetails />
               </div>
               <div className="font-normal cursor-pointer text-lg flex items-center gap-3 justify-center hover:text-muted-foreground"></div>
             </CardTitle>
