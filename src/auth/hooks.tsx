@@ -70,7 +70,7 @@ export async function signIn({
   if (data.session && typeof window !== 'undefined' && window.localStorage) {
     localStorage.setItem('user_type', JSON.stringify(userType))
   }
-  // router.replace('/dashboard')
+  router.replace('/dashboard')
   // router.refresh()
   // redirect('/dashboard')
 }

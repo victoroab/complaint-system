@@ -38,9 +38,6 @@ export function LoginForm({ userType }: { userType: string }) {
 
   const signInMutation = useMutation({
     mutationFn: signIn,
-    onSuccess() {
-      router.replace('/dashboard')
-    },
   })
 
   function onSubmit({ email, password }: z.infer<typeof formSchema>) {
@@ -108,6 +105,7 @@ export function LoginForm({ userType }: { userType: string }) {
             )}
           </Button>
         </form>
+        <Button onClick={() => router.replace('/sign-in/dc')}>dc</Button>
       </Form>
     </>
   )
