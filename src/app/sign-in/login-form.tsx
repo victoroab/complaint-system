@@ -42,12 +42,13 @@ export function LoginForm({ userType }: { userType: string }) {
 
   function onSubmit({ email, password }: z.infer<typeof formSchema>) {
     signInMutation.mutate({
-      router,
       email,
       password,
       userType,
     })
   }
+
+  signInMutation.isSuccess && router.replace('/dashboard')
 
   if (signInMutation.isError) {
     toast(signInMutation.error.name, {

@@ -48,12 +48,10 @@ export async function signOut(router: AppRouterInstance) {
 }
 
 export async function signIn({
-  router,
   email,
   password,
   userType,
 }: {
-  router: AppRouterInstance
   email: string
   password: string
   userType: string
@@ -70,7 +68,6 @@ export async function signIn({
   if (data.session && typeof window !== 'undefined' && window.localStorage) {
     localStorage.setItem('user_type', JSON.stringify(userType))
   }
-  router.replace('/dashboard')
   // router.refresh()
   // redirect('/dashboard')
 }
