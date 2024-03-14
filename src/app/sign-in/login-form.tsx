@@ -41,7 +41,7 @@ export function LoginForm({ userType }: { userType: string }) {
     onSuccess() {
       const session = JSON.parse(localStorage.getItem('session_key')!)
       if (session.access_token) {
-        console.log('Hi')
+        router.replace('/dashboard')
       }
     },
   })
