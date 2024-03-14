@@ -17,11 +17,11 @@ import { Suspense } from 'react'
 
 export default function Page() {
   return (
-    <section className="w-full min-h-full pb-0 lg:py-12 p-6 xl:px-24 dark:bg-primary-foreground">
-      <Suspense fallback={<>Loading...</>}>
+    <Suspense fallback={<>Loading...</>}>
+      <section className="w-full min-h-full pb-0 lg:py-12 p-6 xl:px-24 dark:bg-primary-foreground">
         <Content />
-      </Suspense>
-    </section>
+      </section>
+    </Suspense>
   )
 }
 
