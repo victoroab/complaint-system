@@ -38,6 +38,12 @@ export function LoginForm({ userType }: { userType: string }) {
 
   const signInMutation = useMutation({
     mutationFn: signIn,
+    onSuccess() {
+      const session = JSON.parse(localStorage.getItem('session_key')!)
+      if (session.access_token) {
+        console.log('Hi')
+      }
+    },
   })
 
   function onSubmit({ email, password }: z.infer<typeof formSchema>) {
@@ -47,9 +53,6 @@ export function LoginForm({ userType }: { userType: string }) {
       userType,
     })
   }
-
-  signInMutation.isSuccess && console.log(signInMutation.data)
-  // signInMutation.isSuccess && router.replace('/dashboard')
 
   if (signInMutation.isError) {
     toast(signInMutation.error.name, {
