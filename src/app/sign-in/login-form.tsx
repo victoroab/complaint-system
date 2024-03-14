@@ -48,7 +48,8 @@ export function LoginForm({ userType }: { userType: string }) {
     })
   }
 
-  signInMutation.isSuccess && router.replace('/dashboard')
+  signInMutation.isSuccess && console.log(signInMutation.data)
+  // signInMutation.isSuccess && router.replace('/dashboard')
 
   if (signInMutation.isError) {
     toast(signInMutation.error.name, {
