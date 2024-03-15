@@ -1,19 +1,19 @@
-import { UserDetails } from './user-details'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { GearIcon, PersonIcon } from '@radix-ui/react-icons'
-import {
-  Drawer,
-  DrawerContent,
-  DrawerHeader,
-  DrawerTrigger,
-} from '@/components/ui/drawer'
-import { Label } from '@/components/ui/label'
-import { Dialog, DialogTrigger } from '@/components/ui/dialog'
-import { LockKeyhole, LogOutIcon } from 'lucide-react'
-import Link from 'next/link'
-import { SignOutDialog } from '@/components/signout-dialog'
-import { Suspense } from 'react'
-import { DashboardRender } from './dashboard-render'
+// import { UserDetails } from './user-details'
+// import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+// import { GearIcon, PersonIcon } from '@radix-ui/react-icons'
+// import {
+//   Drawer,
+//   DrawerContent,
+//   DrawerHeader,
+//   DrawerTrigger,
+// } from '@/components/ui/drawer'
+// import { Label } from '@/components/ui/label'
+// import { Dialog, DialogTrigger } from '@/components/ui/dialog'
+// import { LockKeyhole, LogOutIcon } from 'lucide-react'
+// import Link from 'next/link'
+// import { SignOutDialog } from '@/components/signout-dialog'
+// import { Suspense } from 'react'
+// import { DashboardRender } from './dashboard-render'
 
 // const DashboardRender = dynamic(
 //   () =>
@@ -26,7 +26,7 @@ import { DashboardRender } from './dashboard-render'
 export default function Page() {
   return (
     <section className="w-full min-h-full pb-0 lg:py-12 p-6 xl:px-24 dark:bg-primary-foreground">
-      <div className="w-full h-full flex flex-col">
+      {/* <div className="w-full h-full flex flex-col">
         <div className="mb-5 pb-2 text-primary font-bold text-2xl border-b-4 flex"></div>
         <Card className="w-full rounded-2xl mb-8 bg-muted h-full">
           <CardHeader className="">
@@ -91,7 +91,7 @@ export default function Page() {
             </Suspense>
           </CardContent>
         </Card>
-      </div>
+      </div> */}
     </section>
   )
 }
