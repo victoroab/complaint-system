@@ -96,9 +96,9 @@ function Content() {
               </DrawerContent>
             </Drawer>
           </div>
-          <Suspense fallback={<>Loading...</>}>
+          {/* <Suspense fallback={<>Loading...</>}>
             <DashboardRender />
-          </Suspense>
+          </Suspense> */}
         </CardContent>
       </Card>
     </div>
