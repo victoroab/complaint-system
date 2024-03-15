@@ -41,7 +41,7 @@ export function LoginForm({ userType }: { userType: string }) {
     onSuccess() {
       const session = JSON.parse(localStorage.getItem('session_key')!)
       if (session.access_token) {
-        router.replace('/complaints/resolved')
+        router.replace('/profile')
       }
     },
   })
@@ -110,7 +110,7 @@ export function LoginForm({ userType }: { userType: string }) {
             )}
           </Button>
         </form>
-        <Button onClick={() => router.replace('/sign-in/dc')}>dc</Button>
+        {/* <Button onClick={() => router.replace('/sign-in/dc')}>dc</Button> */}
       </Form>
     </>
   )
