@@ -11,9 +11,18 @@ import { Label } from '@/components/ui/label'
 import { Dialog, DialogTrigger } from '@/components/ui/dialog'
 import { LockKeyhole, LogOutIcon } from 'lucide-react'
 import Link from 'next/link'
-import { DashboardRender } from './dashboard-render'
 import { SignOutDialog } from '@/components/signout-dialog'
 import { Suspense } from 'react'
+import dynamic from 'next/dynamic'
+import { DashboardRender } from './dashboard-render'
+
+// const DashboardRender = dynamic(
+//   () =>
+//     import('../dashboard/dashboard-render/DashboardRender').then(
+//       (mod) => mod.DashboardRender
+//     ),
+//   { ssr: false }
+// )
 
 export default function Page() {
   return (
@@ -87,7 +96,9 @@ function Content() {
               </DrawerContent>
             </Drawer>
           </div>
-          <DashboardRender />
+          <Suspense fallback={<>Loading...</>}>
+            <DashboardRender />
+          </Suspense>
         </CardContent>
       </Card>
     </div>
