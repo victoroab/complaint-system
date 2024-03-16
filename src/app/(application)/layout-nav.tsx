@@ -131,7 +131,7 @@ export function LayoutNav({ children }: { children: React.ReactNode }) {
             </Dialog>
           </div>
         </nav>
-        <Suspense fallback={null}>{children}</Suspense>
+        <Suspense fallback={<>Loading...</>}>{children}</Suspense>
       </section>
     </>
   )
