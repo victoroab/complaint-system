@@ -110,9 +110,7 @@ export function LoginForm({ userType }: { userType: string }) {
               'Sign in'
             )}
           </Button>
-          <Link href={'/dashboard'} prefetch={true}>
-            .
-          </Link>
+          <Link href={'/dashboard'} prefetch={true}></Link>
         </form>
         {/* <Button onClick={() => router.replace('/sign-in/dc')}>dc</Button> */}
       </Form>
