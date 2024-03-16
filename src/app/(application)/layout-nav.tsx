@@ -26,7 +26,7 @@ import Loading from './loading'
 import { SignOutDialog } from '@/components/signout-dialog'
 
 export function LayoutNav({ children }: { children: React.ReactNode }) {
-  // useAuth()
+  useAuth()
 
   return (
     <>
