@@ -21,7 +21,7 @@ import {
 //   )
 // )
 
-export default function DashboardRender() {
+export function DashboardRender() {
   const session: Session = useContext(AuthContext)
 
   switch (session.userType) {

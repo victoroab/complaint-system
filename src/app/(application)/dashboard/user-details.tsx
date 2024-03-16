@@ -5,7 +5,7 @@ import { getUserData } from './functions'
 import { Skeleton } from '@/components/ui/skeleton'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 
-export default function UserDetails() {
+export function UserDetails() {
   const email = useGetEmail()
   const userType = useGetUserType()?.toLowerCase() as
     | 'student'

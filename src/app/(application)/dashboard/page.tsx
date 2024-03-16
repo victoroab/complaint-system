@@ -1,4 +1,4 @@
-// import { UserDetails } from './user-details'
+import { UserDetails } from './user-details'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { GearIcon, PersonIcon } from '@radix-ui/react-icons'
 import {
@@ -13,15 +13,15 @@ import { LockKeyhole, LogOutIcon } from 'lucide-react'
 import Link from 'next/link'
 import { SignOutDialog } from '@/components/signout-dialog'
 import { Suspense } from 'react'
-// import { DashboardRender } from './dashboard-render'
+import { DashboardRender } from './dashboard-render'
 import dynamic from 'next/dynamic'
 
-const UserDetails = dynamic(() =>
-  import('../dashboard/user-details').then((mod) => mod.default)
-)
-const DashboardRender = dynamic(() =>
-  import('../dashboard/dashboard-render').then((mod) => mod.default)
-)
+// const UserDetails = dynamic(() =>
+//   import('../dashboard/user-details').then((mod) => mod.default)
+// )
+// const DashboardRender = dynamic(() =>
+//   import('../dashboard/dashboard-render').then((mod) => mod.default)
+// )
 
 export default function Page() {
   return (
