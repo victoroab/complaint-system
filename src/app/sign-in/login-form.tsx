@@ -19,10 +19,10 @@ import { useMutation } from '@tanstack/react-query'
 import { ReloadIcon } from '@radix-ui/react-icons'
 import { ShieldBan } from 'lucide-react'
 import { toast } from 'sonner'
-import Link from 'next/link'
 
 export function LoginForm({ userType }: { userType: string }) {
   const router = useRouter()
+  router.prefetch('/dashboard')
 
   const formSchema = z.object({
     email: z.string().min(10, {
@@ -110,9 +110,7 @@ export function LoginForm({ userType }: { userType: string }) {
               'Sign in'
             )}
           </Button>
-          <Link href={'/dashboard'} prefetch={true}></Link>
         </form>
-        {/* <Button onClick={() => router.replace('/sign-in/dc')}>dc</Button> */}
       </Form>
     </>
   )
