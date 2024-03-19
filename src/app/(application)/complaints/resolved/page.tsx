@@ -1,8 +1,8 @@
 'use client'
 
 import { useGetUserType } from '@/auth/hooks'
-import { ResolvedTableData } from '../table-data'
 import { BackButton } from '../../back-button'
+import { ResolvedTable } from './resolved-table'
 
 export default function Page() {
   const userType = useGetUserType()
@@ -14,7 +14,7 @@ export default function Page() {
           <BackButton />
         </div>
         <div className="h-3/4 overflow-y-scroll">
-          <ResolvedTableData user={userType} />
+          <ResolvedTable user={userType} />
         </div>
       </div>
     </section>

@@ -1,7 +1,7 @@
 'use client'
 
 import { BackButton } from '../../back-button'
-import { ProgressTableData } from '../table-data'
+import { ProgressTable } from './progress-table'
 
 export default function Page() {
   return (
@@ -11,7 +11,7 @@ export default function Page() {
           In Progress
           <BackButton />
         </div>
-        <ProgressTableData />
+        <ProgressTable />
       </div>
     </section>
   )

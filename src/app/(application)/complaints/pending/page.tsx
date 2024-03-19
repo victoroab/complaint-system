@@ -1,8 +1,8 @@
 'use client'
 
 import { useGetUserType } from '@/auth/hooks'
-import { PendingTableData } from '../table-data'
 import { BackButton } from '../../back-button'
+import { PendingTable } from './pending-table'
 
 export default function Page() {
   const userType = useGetUserType()
@@ -14,7 +14,7 @@ export default function Page() {
           <BackButton />
         </div>
         <div className="h-3/4 overflow-y-scroll">
-          <PendingTableData user={userType} />
+          <PendingTable user={userType} />
         </div>
       </div>
     </section>
